@@ -1,0 +1,45 @@
+name: DOM Diff
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  dom-diff:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: next-site/package-lock.json
+
+      - name: Install
+        working-directory: next-site
+        run: npm ci
+
+      - name: Build
+        working-directory: next-site
+        run: npm run build
+
+      - name: Guard No Client Components
+        working-directory: next-site
+        run: npm run guard:no-client
+
+      - name: JS Payload Guard
+        working-directory: next-site
+        run: npm run guard:js
+
+      - name: CSS Hash Guard
+        working-directory: next-site
+        run: npm run guard:css
+
+      - name: DOM Diff
+        working-directory: next-site
+        run: npm run dom:diff

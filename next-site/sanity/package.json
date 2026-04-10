@@ -1,0 +1,16 @@
+{
+  "name": "dacare-studio",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "sanity dev",
+    "build": "sanity build",
+    "deploy": "sanity deploy",
+    "typegen": "sanity typegen"
+  },
+  "dependencies": {
+    "sanity": "^5.18.0",
+    "styled-components": "^6.3.12"
+  }
+}

@@ -1,0 +1,9 @@
+.vercel
+node_modules/
+dist/
+.claude/
+temp-skills/
+next-site/node_modules/
+next-site/.next/
+.env
+.DS_Store

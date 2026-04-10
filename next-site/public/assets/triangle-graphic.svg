@@ -1,0 +1,23 @@
+<svg width="522" height="439" viewBox="0 0 522 439" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Placeholder triangle illustration — replace with actual asset -->
+  <rect width="522" height="439" fill="none"/>
+  
+  <!-- Triangle outline -->
+  <path d="M261 60 L462 380 L60 380 Z" fill="none" stroke="#000" stroke-width="1"/>
+  
+  <!-- Equal sign in center -->
+  <rect x="236" y="240" width="50" height="5" fill="#ccc" rx="2"/>
+  <rect x="236" y="255" width="50" height="5" fill="#ccc" rx="2"/>
+  
+  <!-- Top vertex circle -->
+  <circle cx="261" cy="55" r="32" fill="#f8f8f8" stroke="#e0e0e0" stroke-width="1"/>
+  <path d="M261 42 L270 58 L252 58 Z" fill="none" stroke="#aaa" stroke-width="1"/>
+  
+  <!-- Bottom-left vertex circle -->
+  <circle cx="55" cy="385" r="32" fill="#f8f8f8" stroke="#e0e0e0" stroke-width="1"/>
+  <path d="M55 372 L64 388 L46 388 Z" fill="none" stroke="#aaa" stroke-width="1"/>
+  
+  <!-- Bottom-right vertex circle -->
+  <circle cx="467" cy="385" r="32" fill="#f8f8f8" stroke="#e0e0e0" stroke-width="1"/>
+  <path d="M467 372 L476 388 L458 388 Z" fill="none" stroke="#aaa" stroke-width="1"/>
+</svg>

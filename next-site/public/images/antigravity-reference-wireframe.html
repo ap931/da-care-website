@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>da.care — Find Yourself Again</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#FAFAF8;--bg2:#F2F0EC;--dark:#1A1A2E;--body:#4A4A5A;--muted:#8A8A9A;
+  --leda:#74B49B;--coren:#D4A373;--work:#85B7EB;
+  --glass-bg:rgba(255,255,255,0.35);--glass-blur:blur(20px);--glass-border:rgba(255,255,255,0.5);
+}
+html{scroll-behavior:auto}
+body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--dark);overflow-x:hidden}
+
+/* ===== CUSTOM CURSOR ===== */
+.cursor{position:fixed;width:20px;height:20px;border:1.5px solid var(--dark);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .3s,height .3s,border-color .3s,background .3s;mix-blend-mode:difference}
+.cursor.hover{width:56px;height:56px;background:rgba(255,255,255,.08);border-color:#fff}
+
+/* ===== NAV ===== */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:flex;align-items:center;justify-content:space-between;transition:all .6s cubic-bezier(.16,1,.3,1);mix-blend-mode:difference}
+.nav *{color:#fff!important}
+.nav-logo{font-family:'Instrument Serif',serif;font-size:22px;font-style:italic;cursor:pointer}
+.nav-links{display:flex;gap:32px;font-size:13px;letter-spacing:.5px}
+.nav-links a{text-decoration:none;color:inherit;opacity:.5;transition:opacity .3s}
+.nav-links a:hover{opacity:1}
+.nav-cta{padding:9px 24px;border-radius:100px;font-size:12px;font-weight:600;color:var(--dark)!important;background:#fff;border:none;cursor:pointer;transition:transform .3s;mix-blend-mode:normal}
+.nav-cta:hover{transform:scale(1.05)}
+
+/* ===== PROGRESS BAR ===== */
+.progress{position:fixed;top:0;left:0;height:2px;background:var(--leda);z-index:101;width:0%;transition:none}
+
+/* ===== CHAPTER NAV ===== */
+.ch-nav{position:fixed;right:48px;top:50%;transform:translateY(-50%);z-index:90;display:flex;flex-direction:column;gap:24px;mix-blend-mode:difference}
+.ch-nav-dot{width:6px;height:6px;border-radius:50%;background:#fff;opacity:.2;cursor:pointer;transition:all .4s}
+.ch-nav-dot.active{opacity:1;width:6px;height:24px;border-radius:3px}
+
+/* ===== LOADER ===== */
+.loader{position:fixed;inset:0;z-index:200;background:var(--dark);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;transition:opacity .8s,visibility .8s}
+.loader.done{opacity:0;visibility:hidden;pointer-events:none}
+.loader-logo{font-family:'Instrument Serif',serif;font-size:32px;font-style:italic;color:#fff;opacity:0;animation:loaderIn 1s ease-out .2s forwards}
+.loader-bar{width:120px;height:2px;background:rgba(255,255,255,.1);border-radius:1px;overflow:hidden}
+.loader-fill{height:100%;background:#fff;width:0%;animation:loaderFill 1.8s ease-in-out .4s forwards}
+@keyframes loaderIn{to{opacity:1}}
+@keyframes loaderFill{to{width:100%}}
+
+/* ===== HERO ===== */
+.hero{position:relative;height:300vh}
+.hero-sticky{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;background:var(--dark)}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,#2a2a40 0%,var(--dark) 70%);transition:opacity 1s}
+.hero-grain{position:absolute;inset:0;opacity:.04;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:128px;pointer-events:none}
+
+.hero-content{position:relative;z-index:2;text-align:center;color:#fff}
+.hero-whisper{font-size:12px;letter-spacing:4px;text-transform:uppercase;opacity:0;transform:translateY(20px);margin-bottom:24px}
+.hero-triangle{width:420px;height:400px;margin:0 auto 32px;opacity:0;transform:scale(.85)}
+.hero-title{font-family:'Instrument Serif',serif;font-size:clamp(52px,9vw,120px);font-weight:400;line-height:.95;opacity:0;transform:translateY(40px)}
+.hero-title em{font-style:italic;color:var(--leda)}
+.hero-sub{font-size:16px;opacity:0;transform:translateY(20px);color:rgba(255,255,255,.5);max-width:400px;margin:20px auto 0;line-height:1.7}
+.hero-scroll{position:absolute;bottom:48px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.3);font-size:11px;letter-spacing:3px;display:flex;flex-direction:column;align-items:center;gap:12px}
+.hero-scroll-line{width:1px;height:48px;background:linear-gradient(180deg,rgba(255,255,255,.3),transparent);animation:scrollPulse 2s ease-in-out infinite}
+@keyframes scrollPulse{0%,100%{opacity:.3;transform:scaleY(1)}50%{opacity:.8;transform:scaleY(1.2)}}
+
+/* ===== REVEAL SECTION (clip-path wipe) ===== */
+.reveal-wipe{position:relative;height:100vh;overflow:hidden}
+.reveal-wipe-inner{position:sticky;top:0;height:100vh;display:flex;align-items:center;background:var(--bg);clip-path:inset(8% 8% 8% 8% round 24px);transition:clip-path .1s linear}
+
+/* ===== PROBLEM — Sticky text reveal ===== */
+.problem-wrap{position:relative;height:300vh}
+.problem-sticky{position:sticky;top:0;height:100vh;display:flex;align-items:center;overflow:hidden;background:var(--bg)}
+.problem-bg-word{position:absolute;font-family:'Instrument Serif',serif;font-size:clamp(200px,30vw,450px);font-weight:400;opacity:.03;color:var(--dark);right:-5%;top:50%;transform:translateY(-50%);white-space:nowrap;pointer-events:none}
+.problem-content{margin-left:12%;max-width:600px;position:relative;z-index:1}
+.problem-label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:24px}
+.problem-title{font-family:'Instrument Serif',serif;font-size:clamp(36px,5vw,64px);font-weight:400;line-height:1.08;margin-bottom:24px}
+.problem-lines{display:flex;flex-direction:column;gap:20px}
+.p-line{font-size:18px;color:var(--body);line-height:1.6;opacity:0;transform:translateY(16px);transition:all .6s cubic-bezier(.16,1,.3,1)}
+.p-line.visible{opacity:1;transform:translateY(0)}
+
+/* ===== LEDA — Horizontal reveal ===== */
+.leda-wrap{position:relative;height:200vh}
+.leda-sticky{position:sticky;top:0;height:100vh;display:grid;grid-template-columns:1fr 1fr;overflow:hidden}
+.leda-visual{background:linear-gradient(160deg,#dceee4,#eef6f0);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.leda-visual::before{content:'';position:absolute;width:600px;height:600px;border-radius:50%;background:var(--leda);opacity:.07;top:-150px;right:-150px;animation:breathe 8s ease-in-out infinite}
+@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+.phone{width:240px;height:460px;background:var(--glass-bg);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);border:1px solid var(--glass-border);border-radius:36px;box-shadow:0 40px 100px rgba(0,0,0,.1);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;color:var(--muted);font-size:13px;position:relative}
+.phone-notch{position:absolute;top:14px;width:80px;height:5px;border-radius:3px;background:var(--dark);opacity:.07}
+.phone-glow{position:absolute;inset:-2px;border-radius:38px;background:conic-gradient(from 0deg,var(--leda),var(--work),var(--coren),var(--leda));opacity:.15;filter:blur(20px);animation:glowSpin 8s linear infinite}
+@keyframes glowSpin{to{transform:rotate(360deg)}}
+
+.leda-content{display:flex;flex-direction:column;justify-content:center;padding:80px 80px 80px 64px;background:var(--bg)}
+.badge{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:100px;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:24px;width:fit-content}
+.badge-l{background:rgba(116,180,155,.1);color:#2D6A4F}
+.badge-c{background:rgba(212,163,115,.1);color:#854F0B}
+.sec-title{font-family:'Instrument Serif',serif;font-size:clamp(32px,3.5vw,52px);font-weight:400;line-height:1.1;margin-bottom:20px}
+.sec-body{font-size:16px;color:var(--body);line-height:1.7;max-width:420px;margin-bottom:32px}
+.features{display:flex;flex-direction:column;gap:16px;margin-bottom:40px}
+.feat{display:flex;align-items:flex-start;gap:14px;font-size:14px;color:var(--body);line-height:1.5}
+.feat-dot{width:8px;height:8px;border-radius:50%;margin-top:6px;flex-shrink:0}
+.btn-row{display:flex;gap:12px;flex-wrap:wrap}
+.btn-p{padding:14px 36px;border-radius:100px;font-size:14px;font-weight:600;color:#fff;background:var(--dark);border:none;cursor:pointer;transition:all .4s cubic-bezier(.16,1,.3,1)}
+.btn-p:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 12px 32px rgba(26,26,46,.2)}
+.btn-g{padding:14px 36px;border-radius:100px;font-size:14px;font-weight:600;color:var(--dark);background:transparent;border:1.5px solid rgba(26,26,46,.12);cursor:pointer;transition:all .3s}
+.btn-g:hover{border-color:var(--dark);background:rgba(26,26,46,.03)}
+.partners{display:flex;gap:14px;margin-top:28px}
+.partner{width:40px;height:22px;border-radius:6px;background:var(--dark);opacity:.05}
+
+/* ===== INTERLUDE — Big cinematic quote ===== */
+.interlude{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 48px;background:var(--bg);position:relative;overflow:hidden}
+.interlude::before{content:'❝';position:absolute;font-size:300px;opacity:.03;font-family:'Instrument Serif',serif;top:50%;left:50%;transform:translate(-50%,-60%);pointer-events:none}
+.interlude-text{font-family:'Instrument Serif',serif;font-size:clamp(28px,4.5vw,56px);font-weight:400;line-height:1.25;max-width:720px}
+.interlude-text em{font-style:italic;opacity:.35}
+.interlude-credit{margin-top:32px;font-size:13px;color:var(--muted);letter-spacing:1px}
+
+/* ===== ARTICLES — Horizontal scroll ===== */
+.articles-wrap{position:relative;height:300vh;background:var(--bg)}
+.articles-sticky{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;justify-content:center;overflow:hidden;padding:0 96px}
+.articles-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px}
+.articles-title{font-family:'Instrument Serif',serif;font-size:clamp(28px,3.5vw,44px);font-weight:400}
+.articles-link{font-size:13px;color:var(--muted);text-decoration:none;border-bottom:1px solid rgba(0,0,0,.1);padding-bottom:2px;transition:color .3s}
+.articles-link:hover{color:var(--dark)}
+.articles-track{display:flex;gap:28px;will-change:transform}
+.a-card{flex:0 0 380px;border-radius:20px;background:var(--glass-bg);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);border:1px solid var(--glass-border);overflow:hidden;cursor:pointer;transition:transform .6s cubic-bezier(.16,1,.3,1),box-shadow .6s}
+.a-card:hover{transform:translateY(-10px) scale(1.015);box-shadow:0 32px 80px rgba(0,0,0,.08)}
+.a-img{width:100%;height:220px;background:var(--bg2);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px;position:relative}
+.a-img::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(250,250,248,.8))}
+.a-body{padding:28px}
+.a-tag{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.a-title{font-size:18px;font-weight:600;line-height:1.35;margin-bottom:16px}
+.a-link{font-size:13px;color:var(--leda);font-weight:500}
+
+/* ===== COREN — Reverse layout ===== */
+.coren-wrap{position:relative;height:200vh}
+.coren-sticky{position:sticky;top:0;height:100vh;display:grid;grid-template-columns:1fr 1fr;overflow:hidden}
+.coren-visual{background:linear-gradient(160deg,#f5ede2,#faf5ee);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;order:2}
+.coren-visual::before{content:'';position:absolute;width:500px;height:500px;border-radius:50%;background:var(--coren);opacity:.05;bottom:-100px;left:-80px;animation:breathe 10s ease-in-out infinite}
+.browser{width:380px;height:300px;background:var(--glass-bg);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);border:1px solid var(--glass-border);border-radius:16px;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,.07)}
+.browser-bar{height:36px;background:rgba(255,255,255,.5);border-bottom:1px solid rgba(0,0,0,.04);display:flex;align-items:center;gap:6px;padding:0 16px}
+.browser-dot{width:8px;height:8px;border-radius:50%;background:var(--dark);opacity:.07}
+.browser-body{display:flex;align-items:center;justify-content:center;height:calc(100% - 36px);color:var(--muted);font-size:13px;flex-direction:column;gap:6px}
+.coren-content{display:flex;flex-direction:column;justify-content:center;padding:80px 64px 80px 96px;order:1;background:var(--bg)}
+
+/* ===== CLOSING — Fullbleed cinematic ===== */
+.closing{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden;background:var(--dark);color:#fff;padding:120px 48px}
+.closing-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 60%,#2a2a40 0%,var(--dark) 70%)}
+.closing-img{width:100%;max-width:800px;height:300px;border-radius:24px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.3);font-size:14px;margin-bottom:56px;position:relative;z-index:1}
+.closing-title{font-family:'Instrument Serif',serif;font-size:clamp(44px,7vw,88px);font-weight:400;line-height:1;position:relative;z-index:1;margin-bottom:20px}
+.closing-sub{font-size:17px;color:rgba(255,255,255,.4);max-width:440px;line-height:1.7;position:relative;z-index:1;margin-bottom:40px}
+.btn-w{padding:14px 40px;border-radius:100px;font-size:14px;font-weight:600;color:var(--dark);background:#fff;border:none;cursor:pointer;transition:all .4s;position:relative;z-index:1}
+.btn-w:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(255,255,255,.15)}
+
+/* ===== FOOTER ===== */
+footer{background:var(--dark);color:#fff;padding:80px 96px 48px;border-top:1px solid rgba(255,255,255,.05);display:flex;justify-content:space-between;align-items:flex-start}
+.footer-logo{font-family:'Instrument Serif',serif;font-size:24px;font-style:italic;opacity:.5;margin-bottom:20px}
+.footer-copy{font-size:12px;opacity:.2;line-height:1.8}
+.footer-right{display:flex;gap:72px}
+.footer-col-t{font-size:10px;letter-spacing:2px;text-transform:uppercase;opacity:.25;margin-bottom:18px}
+.footer-col a{display:block;font-size:14px;color:#fff;opacity:.4;text-decoration:none;margin-bottom:12px;transition:opacity .3s}
+.footer-col a:hover{opacity:1}
+
+/* ===== GLOBAL ANIMATIONS ===== */
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(36px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.reveal.vis{opacity:1;transform:translateY(0)}
+.rd1{transition-delay:.1s}.rd2{transition-delay:.2s}.rd3{transition-delay:.3s}.rd4{transition-delay:.4s}.rd5{transition-delay:.5s}
+
+/* ===== MAGNETIC HOVER (buttons) ===== */
+[data-magnetic]{transition:transform .3s cubic-bezier(.16,1,.3,1)}
+</style>
+</head>
+<body>
+
+<!-- CUSTOM CURSOR -->
+<div class="cursor" id="cursor"></div>
+
+<!-- PROGRESS BAR -->
+<div class="progress" id="progress"></div>
+
+<!-- LOADER -->
+<div class="loader" id="loader">
+  <div class="loader-logo">da.care</div>
+  <div class="loader-bar"><div class="loader-fill"></div></div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">da.care</div>
+  <div class="nav-links">
+    <a href="#" data-magnetic>Home</a><a href="#" data-magnetic>Leda</a><a href="#" data-magnetic>Coren</a><a href="#" data-magnetic>About</a><a href="#" data-magnetic>Contact</a>
+  </div>
+  <button class="nav-cta" data-magnetic>Get Started</button>
+</nav>
+
+<!-- CHAPTER NAV -->
+<div class="ch-nav" id="chNav">
+  <div class="ch-nav-dot active" data-i="0"></div>
+  <div class="ch-nav-dot" data-i="1"></div>
+  <div class="ch-nav-dot" data-i="2"></div>
+  <div class="ch-nav-dot" data-i="3"></div>
+  <div class="ch-nav-dot" data-i="4"></div>
+  <div class="ch-nav-dot" data-i="5"></div>
+</div>
+
+
+<!-- ============================================ -->
+<!-- HERO — Triangle ecosystem (sticky parallax)  -->
+<!-- ============================================ -->
+<section class="hero" data-ch="0">
+  <div class="hero-sticky">
+    <div class="hero-bg"></div>
+    <div class="hero-grain"></div>
+    <div class="hero-content">
+      <p class="hero-whisper" id="hw">The da.care ecosystem</p>
+
+      <div class="hero-triangle" id="ht">
+        <svg viewBox="0 0 420 400" style="width:100%;height:100%;overflow:visible">
+          <defs>
+            <path id="e1" d="M210 40 L390 350"/>
+            <path id="e2" d="M390 350 L30 350"/>
+            <path id="e3" d="M30 350 L210 40"/>
+          </defs>
+          <path d="M210 40 L390 350 L30 350 Z" fill="none" stroke="#fff" stroke-width=".5" opacity=".15"/>
+          <circle cx="210" cy="40" r="3" fill="#fff" opacity=".1"/>
+          <circle cx="390" cy="350" r="3" fill="#fff" opacity=".1"/>
+          <circle cx="30" cy="350" r="3" fill="#fff" opacity=".1"/>
+
+          <!-- LEDA -->
+          <g>
+            <circle r="36" fill="rgba(255,255,255,.1)" stroke="rgba(255,255,255,.15)" stroke-width="1">
+              <animateMotion dur="8s" repeatCount="indefinite" keyPoints="0;1;0" keyTimes="0;0.5;1" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1"><mpath href="#e1"/></animateMotion>
+            </circle>
+            <circle r="40" fill="#74B49B" opacity=".08">
+              <animateMotion dur="8s" repeatCount="indefinite" keyPoints="0;1;0" keyTimes="0;0.5;1" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1"><mpath href="#e1"/></animateMotion>
+              <animate attributeName="opacity" values=".06;.2;.06" dur="4s" repeatCount="indefinite"/>
+            </circle>
+            <circle r="12" fill="#74B49B" opacity=".4">
+              <animateMotion dur="8s" repeatCount="indefinite" keyPoints="0;1;0" keyTimes="0;0.5;1" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1"><mpath href="#e1"/></animateMotion>
+            </circle>
+            <text font-family="DM Sans,sans-serif" font-size="11" font-weight="600" fill="#74B49B" text-anchor="middle" dy="28" opacity=".8">
+              Leda<animateMotion dur="8s" repeatCount="indefinite" keyPoints="0;1;0" keyTimes="0;0.5;1" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1"><mpath href="#e1"/></animateMotion>
+            </text>
+          </g>
+
+          <!-- COREN -->
+          <g>
+            <circle r="36" fill="rgba(255,255,255,.1)" stroke="rgba(255,255,255,.15)" stroke-width="1">
+              <animateMotion dur="8s" repeatCount="indefinite" keyPoints="0;1;0" keyTimes="0;0.5;1" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1"><mpath href="#e2"/></animateMotion>
+            </circle>
+            <circle r="40" fill="#D4A373" opacity=".08">
+              <animateMotion dur="8s" repeatCount="indefinite" keyPoints="0;1;0" keyTimes="0;0.5;1" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1"><mpath href="#e2"/></animateMotion>
+              <animate attributeName="opacity" values=".06;.2;.06" dur="4s" repeatCount="indefinite"/>
+            </circle>
+            <circle r="12" fill="#D4A373" opacity=".4">
+              <animateMotion dur="8s" repeatCount="indefinite" keyPoints="0;1;0" keyTimes="0;0.5;1" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1"><mpath href="#e2"/></animateMotion>
+            </circle>
+            <text font-family="DM Sans,sans-serif" font-size="11" font-weight="600" fill="#D4A373" text-anchor="middle" dy="28" opacity=".8">
+              Coren<animateMotion dur="8s" repeatCount="indefinite" keyPoints="0;1;0" keyTimes="0;0.5;1" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1"><mpath href="#e2"/></animateMotion>
+            </text>
+          </g>
+
+          <!-- LEDA WORK -->
+          <g>
+            <circle r="36" fill="rgba(255,255,255,.1)" stroke="rgba(255,255,255,.15)" stroke-width="1">
+              <animateMotion dur="8s" repeatCount="indefinite" keyPoints="0;1;0" keyTimes="0;0.5;1" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1"><mpath href="#e3"/></animateMotion>
+            </circle>
+            <circle r="40" fill="#85B7EB" opacity=".08">
+              <animateMotion dur="8s" repeatCount="indefinite" keyPoints="0;1;0" keyTimes="0;0.5;1" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1"><mpath href="#e3"/></animateMotion>
+              <animate attributeName="opacity" values=".06;.2;.06" dur="4s" repeatCount="indefinite"/>
+            </circle>
+            <circle r="12" fill="#85B7EB" opacity=".4">
+              <animateMotion dur="8s" repeatCount="indefinite" keyPoints="0;1;0" keyTimes="0;0.5;1" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1"><mpath href="#e3"/></animateMotion>
+            </circle>
+            <text font-family="DM Sans,sans-serif" font-size="11" font-weight="600" fill="#85B7EB" text-anchor="middle" dy="28" opacity=".8">
+              Leda Work<animateMotion dur="8s" repeatCount="indefinite" keyPoints="0;1;0" keyTimes="0;0.5;1" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1"><mpath href="#e3"/></animateMotion>
+            </text>
+          </g>
+
+          <text x="210" y="215" font-family="Instrument Serif,serif" font-size="16" font-style="italic" fill="#fff" text-anchor="middle" opacity=".2">da.care</text>
+        </svg>
+      </div>
+
+      <h1 class="hero-title" id="htitle">Find <em>yourself</em><br>again</h1>
+      <p class="hero-sub" id="hsub">Three products. One purpose. Care for yourself, your work, and the people you serve.</p>
+    </div>
+    <div class="hero-scroll"><span>SCROLL</span><div class="hero-scroll-line"></div></div>
+  </div>
+</section>
+
+
+<!-- ============================================ -->
+<!-- PROBLEM — Sticky with line-by-line reveal    -->
+<!-- ============================================ -->
+<section class="problem-wrap" data-ch="1">
+  <div class="problem-sticky">
+    <div class="problem-bg-word">noise</div>
+    <div class="problem-content">
+      <p class="problem-label reveal">Chapter 01</p>
+      <h2 class="problem-title reveal rd1">The world got louder.<br>You got lost in it.</h2>
+      <div class="problem-lines">
+        <p class="p-line" data-line="0">Endless notifications pulling you in every direction.</p>
+        <p class="p-line" data-line="1">Doomscrolling through hours that vanish into nothing.</p>
+        <p class="p-line" data-line="2">AI that talks at you — never for you.</p>
+        <p class="p-line" data-line="3">Technology promised freedom. It delivered noise.</p>
+        <p class="p-line" data-line="4" style="font-weight:600;color:var(--dark)">We believed it could be different.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================ -->
+<!-- LEDA — Sticky split reveal                   -->
+<!-- ============================================ -->
+<section class="leda-wrap" data-ch="2">
+  <div class="leda-sticky">
+    <div class="leda-visual">
+      <div class="phone-glow"></div>
+      <div class="phone reveal">
+        <div class="phone-notch"></div>
+        <span>Leda app preview</span>
+        <span style="font-size:11px;opacity:.4">(existing image/video)</span>
+      </div>
+    </div>
+    <div class="leda-content">
+      <div class="badge badge-l reveal">Leda</div>
+      <h2 class="sec-title reveal rd1">Enjoy a calmer and<br>easier life with a<br>healthy Ai.</h2>
+      <p class="sec-body reveal rd2">The doomscroll killer. Focused mini-apps for life's certainties. Get moments of clarity, fun, peace and calm, then get back to living.</p>
+      <div class="features reveal rd3">
+        <div class="feat"><div class="feat-dot" style="background:var(--leda)"></div>Organized life spaces: Me, People, Focus</div>
+        <div class="feat"><div class="feat-dot" style="background:var(--leda)"></div>Source intelligent routing system</div>
+        <div class="feat"><div class="feat-dot" style="background:var(--leda)"></div>Privacy-first double-blind architecture</div>
+      </div>
+      <div class="btn-row reveal rd4">
+        <button class="btn-p" data-magnetic>Apply for Beta</button>
+        <button class="btn-g" data-magnetic>See More</button>
+      </div>
+      <div class="partners reveal rd5">
+        <div class="partner"></div><div class="partner"></div><div class="partner"></div><div class="partner"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================ -->
+<!-- INTERLUDE — Cinematic quote                  -->
+<!-- ============================================ -->
+<section class="interlude" data-ch="3">
+  <p class="interlude-text reveal">"We don't just build tools.<br><em>We build sanctuary.</em>"</p>
+  <p class="interlude-credit reveal rd2">— da.care manifesto</p>
+</section>
+
+
+<!-- ============================================ -->
+<!-- ARTICLES — Horizontal scroll                 -->
+<!-- ============================================ -->
+<section class="articles-wrap" data-ch="3" id="articlesWrap">
+  <div class="articles-sticky" id="articlesSticky">
+    <div class="articles-header">
+      <h2 class="articles-title reveal">From our team</h2>
+      <a href="#" class="articles-link reveal rd1">View all →</a>
+    </div>
+    <div class="articles-track" id="articlesTrack">
+      <div class="a-card">
+        <div class="a-img">Article image 1 (existing)</div>
+        <div class="a-body">
+          <div class="a-tag">Wellness</div>
+          <div class="a-title">What is a healthy daily usage?</div>
+          <div class="a-link">Learn more →</div>
+        </div>
+      </div>
+      <div class="a-card">
+        <div class="a-img">Article image 2 (existing)</div>
+        <div class="a-body">
+          <div class="a-tag">Manifesto</div>
+          <div class="a-title">Because we needed something meaningful</div>
+          <div class="a-link">Learn more →</div>
+        </div>
+      </div>
+      <div class="a-card">
+        <div class="a-img">Article image 3 (existing)</div>
+        <div class="a-body">
+          <div class="a-tag">Design</div>
+          <div class="a-title">Building something with AI that my grandma would love</div>
+          <div class="a-link">Learn more →</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================ -->
+<!-- COREN — Reverse sticky split                 -->
+<!-- ============================================ -->
+<section class="coren-wrap" data-ch="4">
+  <div class="coren-sticky">
+    <div class="coren-content">
+      <div class="badge badge-c reveal">Coren</div>
+      <h2 class="sec-title reveal rd1">Ai rank & match<br>with your perfect<br>clients.</h2>
+      <p class="sec-body reveal rd2">Get discovered by the right people. Verify your business, build trust, and let AI bring you customers you'll actually enjoy working with.</p>
+      <div class="features reveal rd3">
+        <div class="feat"><div class="feat-dot" style="background:var(--coren)"></div>Free business verification</div>
+        <div class="feat"><div class="feat-dot" style="background:var(--coren)"></div>AI-powered client matching</div>
+        <div class="feat"><div class="feat-dot" style="background:var(--coren)"></div>Profile analytics & trust signals</div>
+      </div>
+      <div class="btn-row reveal rd4">
+        <button class="btn-p" data-magnetic>Start Now</button>
+        <button class="btn-g" data-magnetic>See More</button>
+      </div>
+      <div class="partners reveal rd5">
+        <div class="partner"></div><div class="partner"></div><div class="partner"></div><div class="partner"></div><div class="partner"></div>
+      </div>
+    </div>
+    <div class="coren-visual">
+      <div class="browser reveal">
+        <div class="browser-bar"><div class="browser-dot"></div><div class="browser-dot"></div><div class="browser-dot"></div></div>
+        <div class="browser-body"><span>Coren dashboard</span><span style="font-size:11px;opacity:.4">(existing image)</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================ -->
+<!-- CLOSING — Dark cinematic                     -->
+<!-- ============================================ -->
+<section class="closing" data-ch="5">
+  <div class="closing-bg"></div>
+  <div class="closing-img reveal">Silhouette image (existing)</div>
+  <h2 class="closing-title reveal rd1">Find yourself again.</h2>
+  <p class="closing-sub reveal rd2">da.care creates natural modern products that bring peace and freedom to people.</p>
+  <button class="btn-w reveal rd3" data-magnetic>Read our manifesto</button>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">da.care</div>
+    <div class="footer-copy">da.care SA CHE-425.383.392<br>Switzerland · 2026</div>
+  </div>
+  <div class="footer-right">
+    <div>
+      <div class="footer-col-t">Products</div>
+      <div class="footer-col"><a href="#">Leda</a><a href="#">Coren</a><a href="#">Leda Work</a></div>
+    </div>
+    <div>
+      <div class="footer-col-t">Company</div>
+      <div class="footer-col"><a href="#">About</a><a href="#">Contact</a><a href="#">Careers</a></div>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+// ===== LOADER =====
+window.addEventListener('load', () => {
+  setTimeout(() => document.getElementById('loader').classList.add('done'), 2200);
+  // Hero entrance sequence
+  setTimeout(() => {
+    document.getElementById('hw').style.cssText = 'opacity:1;transform:translateY(0);transition:all 1s cubic-bezier(.16,1,.3,1)';
+  }, 2400);
+  setTimeout(() => {
+    document.getElementById('ht').style.cssText = 'opacity:1;transform:scale(1);transition:all 1.2s cubic-bezier(.16,1,.3,1)';
+  }, 2700);
+  setTimeout(() => {
+    document.getElementById('htitle').style.cssText = 'opacity:1;transform:translateY(0);transition:all 1s cubic-bezier(.16,1,.3,1)';
+  }, 3100);
+  setTimeout(() => {
+    document.getElementById('hsub').style.cssText = 'opacity:1;transform:translateY(0);transition:all .8s cubic-bezier(.16,1,.3,1)';
+  }, 3500);
+});
+
+// ===== CUSTOM CURSOR =====
+const cur = document.getElementById('cursor');
+document.addEventListener('mousemove', e => {
+  cur.style.left = e.clientX + 'px';
+  cur.style.top = e.clientY + 'px';
+});
+document.querySelectorAll('a,button,[data-magnetic]').forEach(el => {
+  el.addEventListener('mouseenter', () => cur.classList.add('hover'));
+  el.addEventListener('mouseleave', () => cur.classList.remove('hover'));
+});
+
+// ===== PROGRESS BAR =====
+const prog = document.getElementById('progress');
+window.addEventListener('scroll', () => {
+  const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+  prog.style.width = pct + '%';
+});
+
+// ===== REVEAL OBSERVER =====
+const revObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
+
+// ===== CHAPTER NAV =====
+const chs = document.querySelectorAll('[data-ch]');
+const dots = document.querySelectorAll('.ch-nav-dot');
+const chObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      dots.forEach(d => d.classList.remove('active'));
+      const i = e.target.dataset.ch;
+      if (dots[i]) dots[i].classList.add('active');
+    }
+  });
+}, { threshold: 0.3 });
+chs.forEach(s => chObs.observe(s));
+dots.forEach(d => d.addEventListener('click', () => {
+  const t = document.querySelector(`[data-ch="${d.dataset.i}"]`);
+  if (t) t.scrollIntoView({ behavior: 'smooth' });
+}));
+
+// ===== PROBLEM — Line-by-line reveal on scroll =====
+const probWrap = document.querySelector('.problem-wrap');
+const pLines = document.querySelectorAll('.p-line');
+window.addEventListener('scroll', () => {
+  if (!probWrap) return;
+  const rect = probWrap.getBoundingClientRect();
+  const progress = Math.max(0, Math.min(1, -rect.top / (rect.height - window.innerHeight)));
+  pLines.forEach((l, i) => {
+    const threshold = i / pLines.length;
+    l.classList.toggle('visible', progress > threshold + .05);
+  });
+});
+
+// ===== ARTICLES — Horizontal scroll =====
+const artWrap = document.getElementById('articlesWrap');
+const artTrack = document.getElementById('articlesTrack');
+window.addEventListener('scroll', () => {
+  if (!artWrap || !artTrack) return;
+  const rect = artWrap.getBoundingClientRect();
+  const progress = Math.max(0, Math.min(1, -rect.top / (rect.height - window.innerHeight)));
+  const maxShift = artTrack.scrollWidth - artTrack.parentElement.offsetWidth;
+  artTrack.style.transform = `translateX(${-progress * maxShift}px)`;
+});
+
+// ===== HERO PARALLAX ON SCROLL =====
+const heroSticky = document.querySelector('.hero-sticky');
+window.addEventListener('scroll', () => {
+  const heroRect = document.querySelector('.hero').getBoundingClientRect();
+  const p = Math.max(0, Math.min(1, -heroRect.top / (heroRect.height - window.innerHeight)));
+  if (heroSticky) {
+    heroSticky.style.opacity = 1 - p * 1.5;
+    heroSticky.querySelector('.hero-content').style.transform = `translateY(${p * -60}px) scale(${1 - p * .08})`;
+  }
+});
+</script>
+</body>
+</html>

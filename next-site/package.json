@@ -1,0 +1,29 @@
+{
+  "name": "next-site",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "dom:diff": "node scripts/dom-diff.js",
+    "guard:no-client": "node scripts/no-client-components.js",
+    "guard:js": "node scripts/js-payload-guard.js",
+    "guard:css": "node scripts/css-hash-guard.js",
+    "guard:baseline": "node scripts/guard-baseline.js"
+  },
+  "dependencies": {
+    "@sanity/client": "^7.20.0",
+    "@sanity/image-url": "^2.0.3",
+    "@sanity/webhook": "^4.0.4",
+    "next": "16.2.1",
+    "parse5": "^8.0.0",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "eslint": "^9",
+    "eslint-config-next": "16.2.1"
+  }
+}

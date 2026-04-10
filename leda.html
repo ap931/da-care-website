@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Leda - Advanced automotive solutions for the future." />
+  <title>Leda — da.care</title>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Leda — da.care" />
+  <meta property="og:description" content="Leda - Advanced automotive solutions for the future." />
+  <meta property="og:image" content="/images/og-image.png" />
+  <meta property="og:type" content="website" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/images/favicon.png" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/css/reset.css" />
+  <link rel="stylesheet" href="/css/variables.css" />
+  <link rel="stylesheet" href="/css/global.css" />
+  <link rel="stylesheet" href="/css/components.css" />
+  <link rel="stylesheet" href="/css/pages/leda.css" />
+</head>
+<body class="leda-page">
+
+  <!-- Skip Link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Navbar -->
+  <header class="navbar" role="banner">
+    <div class="container">
+      <a href="/" class="navbar__logo">
+        <img src="/images/Footer logo.webp" alt="da.care" class="navbar__logo-image" />
+      </a>
+              
+        <button class="nav-toggle" aria-expanded="false" aria-label="Open navigation menu">
+          <span class="nav-toggle-open">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          </span>
+          <span class="nav-toggle-close">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </span>
+        </button>
+        <nav class="navbar__nav">
+          <ul class="navbar__menu-list">
+            <li><a href="/leda.html" class="navbar__menu-link">Leda</a></li>
+            <li><a href="https://coren.da.care/" class="navbar__menu-link">Coren</a></li>
+            <li><a href="/leda-business.html" class="navbar__menu-link">Leda Flow</a></li>
+            <li><a href="/about.html" class="navbar__menu-link">About</a></li>
+            <li><a href="https://www.notion.so/nrg4u/da-care-Press-Pack-30bfb84ddf77801bac91d85c6356d633?source=copy_link" class="navbar__menu-link" target="_blank" rel="noopener noreferrer">Press</a></li>
+            <li><a href="/contact.html" class="navbar__menu-link">Contact</a></li>
+          </ul>
+        </nav>
+    </div>
+  </header>
+
+    <!-- Mobile Navigation Overlay -->
+    <div class="mobile-nav" id="mobile-nav" aria-hidden="true" role="dialog" aria-label="Navigation menu">
+      <a href="/leda.html" class="mobile-nav-link">Leda</a>
+      <a href="https://coren.da.care/" class="mobile-nav-link">Coren</a>
+      <a href="/leda-business.html" class="mobile-nav-link">Leda Flow</a>
+      <a href="/about.html" class="mobile-nav-link">About</a>
+      <a href="https://www.notion.so/nrg4u/da-care-Press-Pack-30bfb84ddf77801bac91d85c6356d633?source=copy_link" target="_blank" class="mobile-nav-link">Press</a>
+      <a href="/contact.html" class="mobile-nav-link mobile-nav-cta">Contact</a>
+    </div>
+    
+
+  <main id="main-content">
+  <div class="leda-landing">
+        <!-- ═══ HERO ═══ -->
+    <section class="hero">
+      <div class="hero-falling" id="falling-images-container" aria-hidden="true">
+        <canvas id="falling-images-canvas"></canvas>
+      </div>
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <span class="hero-eyebrow sr">Beta</span>
+          <h1 class="hero-h1 sr sr-d1">Feel-good apps,<br>made just for you.</h1>
+          <div class="hero-actions sr sr-d3">
+            <div class="hero-store-buttons">
+              <a href="https://talk.da.care/leda-waitlist" target="_blank" rel="noopener noreferrer" class="btn btn--white">
+                <img src="/images/icon/Vector.png" alt="" class="btn-store-icon btn-store-icon--apple" />
+                Download for iOS
+              </a>
+              <a href="https://talk.da.care/leda-waitlist" target="_blank" rel="noopener noreferrer" class="btn btn--primary">
+                <img src="/images/icon/Vector-1.png" alt="" class="btn-store-icon" />
+                Download for Android
+              </a>
+            </div>
+            <div class="hero-qr">
+              <img src="/images/Leda/leda_qr_small.png" alt="Scan to Download Leda" />
+              <span class="hero-qr-label">Scan to Download</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+        <!-- ═══ MOOD PICKER ═══ -->
+    <section class="mood-section" id="mood" data-mood="0">
+      <div class="section-headline sr">
+        <h2 class="section-h2">Pick your mood</h2>
+      </div>
+      <div class="wrap">
+        <div class="mood-grid">
+
+          <!-- Desktop: mood list (hidden on mobile) -->
+          <div class="mood-list-wrap sr sr-d1">
+            <div class="mood-list-title" style="font-size: 0.8125rem; font-weight: 700; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem;">Some of our featured apps</div>
+            <div class="mood-list" role="group" aria-label="Select a mood">
+              <button class="mood-row btn active" type="button" data-mood="0" aria-pressed="true" aria-controls="mood-phone">
+                <span class="mood-ic">
+                  <img src="/images/icon/2/Group 51406 4.webp" alt="" />
+                </span>
+                <span class="mood-info">
+                  <span class="mood-name">Make Me Laugh</span>
+                </span>
+                <span class="mood-indicator"></span>
+              </button>
+              <button class="mood-row btn" type="button" data-mood="1" aria-pressed="false" aria-controls="mood-phone">
+                <span class="mood-ic">
+                  <img src="/images/icon/2/Group 51406 5.webp" alt="" />
+                </span>
+                <span class="mood-info">
+                  <span class="mood-name">Good News</span>
+                </span>
+                <span class="mood-indicator"></span>
+              </button>
+              <button class="mood-row btn" type="button" data-mood="2" aria-pressed="false" aria-controls="mood-phone">
+                <span class="mood-ic">
+                  <img src="/images/icon/2/Group 51406 6.webp" alt="" />
+                </span>
+                <span class="mood-info">
+                  <span class="mood-name">Zodiac Read</span>
+                </span>
+                <span class="mood-indicator"></span>
+              </button>
+              <button class="mood-row btn" type="button" data-mood="3" aria-pressed="false" aria-controls="mood-phone">
+                <span class="mood-ic">
+                  <img src="/images/icon/2/Group 51406 7.webp" alt="" />
+                </span>
+                <span class="mood-info">
+                  <span class="mood-name">Free the Stress</span>
+                </span>
+                <span class="mood-indicator"></span>
+              </button>
+              <button class="mood-row btn" type="button" data-mood="4" aria-pressed="false" aria-controls="mood-phone">
+                <span class="mood-ic">
+                  <img src="/images/icon/2/Group 51406 8.webp" alt="" />
+                </span>
+                <span class="mood-info">
+                  <span class="mood-name">How does it work</span>
+                </span>
+                <span class="mood-indicator"></span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Phone — sticky on mobile, right-col on desktop -->
+          <div class="phone-col sr sr-d2">
+            <div class="iphone">
+              <div class="iphone-island"></div>
+              <div class="iphone-screen" id="mood-phone">
+                <div class="feed-layout app-feed" id="feed-0">
+                  <div class="feed-header">
+                    <div class="feed-face-icon">
+                      <img id="feed-top-icon" src="/images/icon/2/Group 51406 4.webp" style="width:100%; height:100%; object-fit:contain;" alt="">
+                    </div>
+                  </div>
+
+                  <!-- VIDEOS -->
+                  <div class="feed-section">
+                    <div class="feed-section-head">
+                      <svg class="feed-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path><circle cx="12" cy="13" r="3"></circle></svg>
+                      VIDEOS
+                    </div>
+                    <div class="feed-videos">
+                      <div class="feed-video-card">
+                        <div class="video-thumb">
+                          <img src="/images/feed-video-thumb1.webp" style="width:100%; height:100%; object-fit:cover;" alt="When Everything Goes Wrong">
+                          <div class="play-btn"><svg viewBox="0 0 24 24" fill="white" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></div>
+                        </div>
+                        <div class="video-info">When Everything Didn't Go According to Plan - YouTube</div>
+                      </div>
+                      <div class="feed-video-card">
+                        <div class="video-thumb">
+                          <img src="/images/feed-video-thumb2.webp" style="width:100%; height:100%; object-fit:cover;" alt="Brutal Yet Relatable">
+                          <div class="play-btn"><svg viewBox="0 0 24 24" fill="white" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></div>
+                        </div>
+                        <div class="video-info">Brutal Yet Relatable</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- PHOTOS -->
+                  <div class="feed-section">
+                    <div class="feed-section-head">
+                      <svg class="feed-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                      PHOTOS
+                    </div>
+                    <div class="feed-photos">
+                      <div class="photo-card">
+                        <div class="photo-badge">1 / 4</div>
+                        <img src="/images/feed-photo-friends.webp" style="width:100%; height:100%; object-fit:cover;" alt="Friends laughing">
+                      </div>
+                      <div class="photo-dots">
+                        <span class="dot active"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Feed 1: Good News -->
+                <div class="feed-layout app-feed" id="feed-1" style="display: none;">
+                  <div class="feed-header">
+                    <div class="feed-face-icon">
+                      <img class="feed-top-icon" src="/images/icon/2/Group 51406 5.webp" style="width:100%; height:100%; object-fit:contain;" alt="">
+                    </div>
+                  </div>
+
+                  <div class="news-list">
+                    <div class="news-card">
+                      <div class="news-img" style="aspect-ratio:4/3;">
+                        <img src="/images/feed-news-airport.webp" style="width:100%; height:100%; object-fit:cover;" alt="Airport construction news">
+                      </div>
+                      <div class="news-content">
+                        <div class="news-title">Any kind of black marketing will not be tolerated: Chief Agriculture Officer Bat...</div>
+                        <div class="news-snippet">28, 2026PM Modi inaugurates Phase I of Noida International Airport in Jewar Mar 28, 2026Minister...</div>
+                      </div>
+                    </div>
+                    <div class="news-card">
+                      <div class="news-img" style="aspect-ratio:16/9;">
+                        <img src="/images/feed-news-zodiac.webp" style="width:100%; height:100%; object-fit:cover;" alt="Zodiac fortune">
+                      </div>
+                      <div class="news-content">
+                        <div class="news-title">3 Zodiac Signs Enter A More Fortunate...</div>
+                        <div class="news-snippet">Astrology predictions and weekly updates for fortune and alignments...</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Feed 2: Zodiac Read -->
+                <div class="feed-layout app-feed" id="feed-2" style="display: none;">
+                  <div class="feed-header">
+                    <div class="feed-face-icon">
+                      <img class="feed-top-icon" src="/images/icon/2/Group 51406 6.webp" style="width:100%; height:100%; object-fit:contain;" alt="">
+                    </div>
+                  </div>
+
+                  <div class="zodiac-content">
+                    <h3 class="zodiac-title">Your Today's Cosmic Snapshot ✨</h3>
+                    <p>Welcome! I'm here to explore the energies moving through your chart today and what they might be inviting you to notice in your career, relationships, and wellbeing.</p>
+                    <p>Let me first map out your birth chart foundation. With your birth details—April 16, 2004, at 15:15 in Burgas—you're a Taurus Sun, grounded and purposeful. To give you the most personalized reading for today's energies touching your Moon and Ascendant, I'd love to know:</p>
+                    <p>What are your Moon and Ascendant signs? (If you're not sure, that's totally fine—we can work with what you know, or you might check a birth chart calculator using your exact birth time and location.)</p>
+                    <p style="opacity: 0.6;">Once I have those pieces, I can offer you a richer sense of:</p>
+                    <ul style="opacity: 0.3;">
+                      <li>Career &amp; Purpose - What energies are</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <!-- Feed 3: Free the Stress -->
+                <div class="feed-layout app-feed" id="feed-3" style="display: none;">
+                  <div class="feed-header">
+                    <div class="feed-face-icon">
+                      <img class="feed-top-icon" src="/images/icon/2/Group 51406 7.webp" style="width:100%; height:100%; object-fit:contain;" alt="">
+                    </div>
+                  </div>
+
+                  <div class="stress-content">
+                    <p>I'm here to help you work through what's on your mind right now.</p>
+                    <p>To suggest practices that'll actually fit your life, I'd like to understand a bit more about what you're experiencing. I'll ask you four quick questions—nothing clinical, just real:</p>
+                    <ol>
+                      <li>What does your stress feel like in your body right now? (For example: tight shoulders, racing thoughts, heaviness in your chest, restlessness, or something else?)</li>
+                      <li>When during the day is it worst? (Morning, midday, evenings, or spread throughout?)</li>
+                      <li>What's your usual pace like? (Are you mostly moving around, sitting at a desk, a mix of both, or something else?)</li>
+                      <li>What kind of activities naturally help you feel calm? (Being alone, being around people, moving, creating, being outside—whatever comes to mind.)</li>
+                    </ol>
+                    <p style="opacity: 0.3;">Take your time with these. The more</p>
+                  </div>
+                </div>
+
+                <!-- Feed 4: How does it work -->
+                <div class="feed-layout app-feed" id="feed-4" style="display: none;">
+                  <div class="feed-header">
+                    <div class="feed-face-icon">
+                      <img class="feed-top-icon" src="/images/icon/2/Group 51406 8.webp" style="width:100%; height:100%; object-fit:contain;" alt="">
+                    </div>
+                  </div>
+
+                  <div class="how-content">
+                    <p>You can use the Voice button to talk directly to Leda—just tap it and describe what's going on, or use the camera option to show her the problem visually. That often helps her understand exactly what you're dealing with.</p>
+                    <p>That said, typing out your issue works great too and sometimes makes it easier to get a clear answer back, since Leda can read through the details carefully.</p>
+                    <p>What's the problem you're running into? I'm here to help you figure it out.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /mood-grid -->
+      </div><!-- /wrap -->
+
+      <!-- Mobile-only pill selector -->
+      <div class="mood-pills" id="mood-pills" role="group" aria-label="Select a mood">
+        <button class="mood-pill btn active" type="button" data-mood="0" aria-pressed="true">
+          <span class="mood-pill-emoji">
+            <img src="/images/icon/2/Group 51406 4.webp" alt="" />
+          </span>
+          <span class="mood-pill-label">Make Me Laugh</span>
+        </button>
+        <button class="mood-pill btn" type="button" data-mood="1" aria-pressed="false">
+          <span class="mood-pill-emoji">
+            <img src="/images/icon/2/Group 51406 5.webp" alt="" />
+          </span>
+          <span class="mood-pill-label">Good News</span>
+        </button>
+        <button class="mood-pill btn" type="button" data-mood="2" aria-pressed="false">
+          <span class="mood-pill-emoji">
+            <img src="/images/icon/2/Group 51406 6.webp" alt="" />
+          </span>
+          <span class="mood-pill-label">Zodiac Read</span>
+        </button>
+        <button class="mood-pill btn" type="button" data-mood="3" aria-pressed="false">
+          <span class="mood-pill-emoji">
+            <img src="/images/icon/2/Group 51406 7.webp" alt="" />
+          </span>
+          <span class="mood-pill-label">Free the Stress</span>
+        </button>
+        <button class="mood-pill btn" type="button" data-mood="4" aria-pressed="false">
+          <span class="mood-pill-emoji">
+            <img src="/images/icon/2/Group 51406 8.webp" alt="" />
+          </span>
+          <span class="mood-pill-label">How does it work</span>
+        </button>
+      </div>
+
+    </section>
+        <!-- ═══ APPS SHAPED BY YOU ═══ -->
+    <section class="shaped-section">
+      <div class="shaped-wrap">
+        <div class="shaped-img sr">
+          <div class="shaped-scene" aria-hidden="true">
+            <div class="shaped-mesh">
+              <canvas class="shaped-gradient" id="shaped-gradient"></canvas>
+            </div>
+
+
+
+            <div class="shaped-lottie-wrap">
+              <div class="shaped-lottie" id="shaped-lottie"></div>
+            </div>
+          </div>
+        </div>
+        <div class="shaped-copy">
+          <h2 class="shaped-h2 sr sr-d1">Apps shaped by you.</h2>
+          <p class="shaped-body sr sr-d2">Every app on Leda asks the right questions and reshapes itself around you. The more you use it, the more it feels like yours.</p>
+        </div>
+      </div>
+    </section>
+        <!-- ═══ JUST TAP ═══ -->
+    <section class="tap-section" id="tap">
+      <div class="wrap">
+        <div class="tap-shell">
+          <div class="tap-intro sr">
+            <h2 class="tap-h2">Leda is for everyone</h2>
+            <p class="tap-body">Leda works like the apps on your phone. No prompts. No typing. Just buttons. Whether you're 15 or 75, you already know how to use it.</p>
+          </div>
+
+          <div class="tap-stones">
+            <div class="tap-stone tap-stone--genz sr sr-d1">
+              <span class="tap-pin" aria-hidden="true"></span>
+              <h3 class="tap-row-name">GenZ's</h3>
+              <p class="tap-row-desc">Feels like the apps you already live in. Fast, visual, no friction. Just pick and go.</p>
+            </div>
+
+            <div class="tap-stone tap-stone--heavy sr sr-d2">
+              <span class="tap-pin" aria-hidden="true"></span>
+              <h3 class="tap-row-name">Heavy AI users</h3>
+              <p class="tap-row-desc">No prompts to write. No outputs to refine. Just lean back and let it work. AI for when you need to relax and live.</p>
+            </div>
+
+            <div class="tap-stone tap-stone--nontech sr sr-d3">
+              <span class="tap-pin" aria-hidden="true"></span>
+              <h3 class="tap-row-name">Non-tech user</h3>
+              <p class="tap-row-desc">If you can use your phone, you can use Leda. Tap a button, get something good. That simple.</p>
+            </div>
+
+            <div class="tap-stone tap-stone--seniors sr sr-d4">
+              <span class="tap-pin" aria-hidden="true"></span>
+              <h3 class="tap-row-name">Seniors</h3>
+              <p class="tap-row-desc">Big buttons. Clear choices. No confusing menus. Just open it and enjoy — like turning on the radio.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+        <!-- ═══ SAFE BY DESIGN ═══ -->
+    <section class="safe-section" id="safe">
+      <svg class="motion-scroll-line" viewBox="0 0 400 1200" aria-hidden="true" preserveAspectRatio="none">
+        <path d="M 0,0 C 200,200 -100,500 200,800 C 400,1000 0,1100 200,1200" fill="none" stroke="currentColor" stroke-width="6" vector-effect="non-scaling-stroke"></path>
+      </svg>
+
+      <div class="safe-head sr">
+        <h2 class="safe-h2">Safe by design</h2>
+        <p class="safe-sub">Your time, your identity, your peace of mind. Leda just protects you.</p>
+      </div>
+
+      <div class="safe-bento">
+
+        <div class="scard sr sr-d1">
+          <div class="scard-num">01</div>
+          <span class="scard-glyph" aria-hidden="true">
+            <img src="/images/Leda/Icons/fi_11272422.svg" alt="">
+          </span>
+          <div class="scard-name">Totally anonymous</div>
+          <p class="scard-desc">Your personal data is kept far away of your usage so no one ever knows who you are.</p>
+        </div>
+
+        <div class="scard sr sr-d2">
+          <div class="scard-num">02</div>
+          <span class="scard-glyph" aria-hidden="true">
+            <img src="/images/Leda/Icons/fi_7257408.svg" alt="">
+          </span>
+          <div class="scard-name">Time-aware</div>
+          <p class="scard-desc">Every 15 minutes, Leda tells you how long you've been here. Your time is yours — we'd rather you spent it well.</p>
+        </div>
+
+        <div class="scard sr sr-d3">
+          <div class="scard-num">03</div>
+          <span class="scard-glyph" aria-hidden="true">
+            <img src="/images/Leda/Icons/fi_9681735.svg" alt="">
+          </span>
+          <div class="scard-name">No doomscrolling</div>
+          <p class="scard-desc">No infinite feeds. No endless scroll. Every app has a beginning, a middle, and an end.</p>
+        </div>
+
+        <div class="scard sr sr-d2">
+          <div class="scard-num">04</div>
+          <div class="scard-glyph" aria-hidden="true">
+            <img src="/images/Leda/Icons/fi_16806676.svg" alt="">
+          </div>
+          <div class="scard-name">No companionship</div>
+          <p class="scard-desc">Leda gives — it doesn't take. No fake friendships, no emotional dependency. Just tools that help you feel good and let you go.</p>
+        </div>
+
+        <div class="scard sr sr-d3">
+          <div class="scard-num">05</div>
+          <span class="scard-glyph" aria-hidden="true">
+            <img src="/images/Leda/Icons/fi_4494250.svg" alt="">
+          </span>
+          <div class="scard-name">Swiss &amp; EU protected</div>
+          <p class="scard-desc">Built under Swiss privacy law and fully GDPR compliant. Your data has the strongest legal shield in the world.</p>
+          <div class="scard-badges">
+            <span class="scard-badge">GDPR</span>
+            <span class="scard-badge">Swiss Law</span>
+          </div>
+        </div>
+
+        <div class="scard scard-cta sr sr-d4">
+          <div class="scard-name">Ready to try Leda?</div>
+          <a href="https://talk.da.care/leda-waitlist" class="btn btn--white scard-cta-btn" target="_blank" rel="noopener noreferrer">Join Waitlist</a>
+        </div>
+
+      </div>
+
+    </section>
+        <!-- ═══ PRICING ═══ -->
+    <section class="pricing-section" id="pricing">
+      <svg class="motion-scroll-line right-aligned" viewBox="0 0 400 1200" aria-hidden="true" preserveAspectRatio="none">
+        <path d="M 400,0 C 100,200 500,500 200,800 C 0,1000 400,1100 200,1200" fill="none" stroke="currentColor" stroke-width="6" vector-effect="non-scaling-stroke"></path>
+      </svg>
+      <div class="wrap-narrow">
+        <h2 class="pricing-h2 sr">Pricing</h2>
+        <p class="pricing-note sr sr-d1">Simple, honest plans. No tricks.</p>
+        <div class="pricing-grid sr sr-d2">
+
+          <div class="p-card sr sr-d1">
+            <div class="p-tier">Free</div>
+            <div class="p-price">€0</div>
+            <div class="p-per">per month</div>
+            <div class="p-rule"></div>
+            <p class="p-desc">Start exploring Leda with a curated selection of apps, no account required.</p>
+          </div>
+
+          <div class="p-card feat sr sr-d2">
+            <div class="p-top-badge">Most Popular</div>
+            <div class="p-tier">Plus</div>
+            <div class="p-price">€4</div>
+            <div class="p-per">per month</div>
+            <div class="p-rule"></div>
+            <p class="p-desc">Full access to all apps, mood tracking, and priority updates.</p>
+          </div>
+
+          <div class="p-card sr sr-d3">
+            <div class="p-tier">Family</div>
+            <div class="p-price">€8</div>
+            <div class="p-per">per month</div>
+            <div class="p-rule"></div>
+            <p class="p-desc">Everything in Plus for up to 5 family members. One feel-good subscription.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+        <!-- ═══ PLACEHOLDER ═══ -->
+    <section class="placeholder-section" id="more">
+      <div class="placeholder-grid" aria-hidden="true">
+        <!-- Top Edge -->
+        <div class="grid-cell" style="grid-row: 2; grid-column: 2;">
+          <img src="/images/Falling icons/Icon 03.webp" alt="" />
+        </div>
+        <div class="grid-cell" style="grid-row: 3; grid-column: 5;">
+          <img src="/images/Falling icons/Icon 05.webp" alt="" />
+        </div>
+        <div class="grid-cell" style="grid-row: 1; grid-column: 8;">
+          <img src="/images/Falling icons/Icon 11.webp" alt="" />
+        </div>
+        <div class="grid-cell" style="grid-row: 2; grid-column: -9;">
+          <img src="/images/Falling icons/Icon 14.webp" alt="" />
+        </div>
+        <div class="grid-cell" style="grid-row: 3; grid-column: -5;">
+          <img src="/images/Falling icons/Icon 07.webp" alt="" />
+        </div>
+        <div class="grid-cell" style="grid-row: 2; grid-column: -2;">
+          <img src="/images/Falling icons/Group 51462.webp" alt="" />
+        </div>
+
+        <!-- Left Edge -->
+        <div class="grid-cell" style="grid-row: 5; grid-column: 3;">
+          <img src="/images/Falling icons/Icon 08.webp" alt="" />
+        </div>
+        <div class="grid-cell" style="grid-row: -5; grid-column: 2;">
+          <img src="/images/Falling icons/Group 51458.webp" alt="" />
+        </div>
+
+        <!-- Right Edge -->
+        <div class="grid-cell" style="grid-row: 4; grid-column: -2;">
+          <img src="/images/Falling icons/Icon 17.webp" alt="" />
+        </div>
+        <div class="grid-cell" style="grid-row: -6; grid-column: -3;">
+          <img src="/images/Falling icons/Icon 16.webp" alt="" />
+        </div>
+
+        <!-- Bottom Edge -->
+        <div class="grid-cell" style="grid-row: -2; grid-column: 3;">
+          <img src="/images/Falling icons/Group 51470.webp" alt="" />
+        </div>
+        <div class="grid-cell" style="grid-row: -4; grid-column: 6;">
+          <img src="/images/Falling icons/Group 51465.webp" alt="" />
+        </div>
+        <div class="grid-cell" style="grid-row: -3; grid-column: 9;">
+          <img src="/images/Falling icons/Icon 29.webp" alt="" />
+        </div>
+        <div class="grid-cell" style="grid-row: -2; grid-column: -8;">
+          <img src="/images/Falling icons/Group 51466.webp" alt="" />
+        </div>
+        <div class="grid-cell" style="grid-row: -4; grid-column: -5;">
+          <img src="/images/Falling icons/Icon 09.webp" alt="" />
+        </div>
+        <div class="grid-cell" style="grid-row: -3; grid-column: -2;">
+          <img src="/images/Falling icons/Icon 10.webp" alt="" />
+        </div>
+      </div>
+      <div class="placeholder-inner sr">
+        <div class="placeholder-dot"></div>
+        <span class="placeholder-label">Coming soon</span>
+        <h2 class="placeholder-title">MORE APPS</h2>
+        <p class="placeholder-note">Something is being designed for this space. Drop your idea and it'll find its place here.</p>
+      </div>
+    </section>
+  </div>
+</main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__logo-section">
+          <a href="/" class="navbar__logo">
+             <img src="/images/Footer logo.webp" alt="da.care" class="footer__logo-image" />
+          </a>
+        </div>
+        <div class="footer__nav-section">
+          <h4 class="footer__title">Navigation</h4>
+          <nav class="footer__links">
+            <a href="/" class="footer__link">Home</a>
+            <a href="/leda.html" class="footer__link">Leda</a>
+            <a href="https://coren.da.care/" class="footer__link">Coren</a>
+            <a href="/leda-business.html" class="footer__link">Leda Business</a>
+            <a href="/about.html" class="footer__link">About</a>
+            <a href="/contact.html" class="footer__link">Contact</a>
+          </nav>
+        </div>
+        <div class="footer__nav-section">
+          <h4 class="footer__title">Legal</h4>
+          <nav class="footer__links">
+            <a href="https://docs.da.care/terms-conditions" class="footer__link" target="_blank" rel="noopener noreferrer">Terms & Conditions</a>
+            <a href="https://docs.da.care/privacy-policy" class="footer__link" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+          </nav>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <div class="footer__copyright">
+          Copyright © da.care SA CHE-425.383.392, <img src="/images/switzerland-flag.svg" alt="Switzerland" class="footer__flag" /> Switzerland 2026
+        </div>
+        <div class="footer__social">
+          <a href="https://www.linkedin.com/company/dacarelife/posts/?feedView=all" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a href="https://www.instagram.com/da.care.life/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+          </a>
+          <a href="https://www.tiktok.com/@da.care.official" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="TikTok">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="/js/falling-images.js" defer></script>
+  <script src="/js/main.js" defer></script>
+  <script src="/js/leda.js" defer></script>
+  <script src="/js/scroll-lines.js" defer></script>
+
+</body>
+</html>

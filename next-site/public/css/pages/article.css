@@ -1,0 +1,114 @@
+/* ── Article Detail Layout ── */
+
+.article-layout {
+  /* Push down past the fixed navbar */
+  padding-top: calc(var(--space-24) + 80px); /* 80px approx navbar height */
+  padding-bottom: var(--space-24);
+  background-color: var(--bg-white);
+  min-height: 100vh;
+}
+
+/* 
+ * The main container is narrow to provide an excellent reading experience 
+ * akin to the Figma design (est 40% of viewport, max ~700px).
+ */
+.article-container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+  color: var(--text-primary);
+}
+
+/* Header Section */
+.article-header {
+  text-align: center;
+  margin-bottom: var(--space-12);
+}
+
+.article-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  line-height: 1.1;
+  font-weight: 700;
+  margin-bottom: var(--space-6);
+  color: #1A1A1A; /* Deep charcoal black */
+}
+
+.article-meta {
+  font-family: 'Inter', sans-serif;
+  font-size: var(--font-body-sm);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 300;
+}
+
+.article-intro {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  margin-top: var(--space-8);
+  color: var(--text-secondary);
+}
+
+/* Content Blocks */
+.article-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.article-body h2 {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-top: var(--space-8);
+  margin-bottom: calc(var(--space-4) * -1); /* Pull content slightly closer to h2 */
+}
+
+.article-body p {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: #333333;
+}
+
+/* Full-width image breaking out of the narrow container */
+.article-body img,
+.article-banner {
+  width: 100vw;
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  margin-top: var(--space-8);
+  margin-bottom: var(--space-8);
+  border-radius: 0; /* Figma images are usually sharp or gently rounded, going sharp for editorial feel unless specified */
+}
+
+/* Override utility on very large screens to not span infinitely */
+@media (min-width: 1400px) {
+  .article-body img,
+  .article-banner {
+    max-width: 1200px;
+    border-radius: var(--radius-lg);
+  }
+}
+
+/* Pagination Area */
+.article-pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--space-16);
+  padding-top: var(--space-8);
+  border-top: 1px solid var(--border-default);
+}
+
+.article-pagination .btn {
+  /* Ensure the buttons don't shrink too much on mobile */
+  flex: 0 1 auto;
+  text-align: center;
+}

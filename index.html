@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Welcome to da.care - Premium auto care services."
+    />
+    <title>Home — da.care</title>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Home — da.care" />
+    <meta
+      property="og:description"
+      content="Welcome to da.care - Premium auto care services."
+    />
+    <meta property="og:image" content="/images/og-image.png" />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap"
+    />
+
+    <!-- SF Pro Display Fallback (System UI) -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />    <!-- Note: Using Inter as a close Google Font alternative to SF Pro if system-ui isn't enough, 
+       but keeping the CSS variable stack as primary. -->
+
+    <!-- Stylesheets (load order matters) -->
+    <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/variables.css" />
+    <link rel="stylesheet" href="/css/global.css" />
+    <link rel="stylesheet" href="/css/components.css" />
+    <link rel="stylesheet" href="/css/pages/homepage.css" />
+    <link rel="stylesheet" href="/css/pages/leda.css" />
+    <link rel="stylesheet" href="/css/hero.css" />
+  </head>
+  <body class="homepage leda-page intro-running">
+    <!-- Skip Link (Accessibility) -->
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <!-- Navbar -->
+    <header class="navbar" role="banner">
+      <div class="container">
+        <a href="/" class="navbar__logo">
+          <img src="/images/Footer logo.webp" alt="da.care" class="navbar__logo-image" />
+        </a>
+        
+        <button class="nav-toggle" aria-expanded="false" aria-label="Open navigation menu">
+          <span class="nav-toggle-open">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          </span>
+          <span class="nav-toggle-close">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </span>
+        </button>
+        <nav class="navbar__nav">
+          <ul class="navbar__menu-list">
+            <li><a href="/leda.html" class="navbar__menu-link">Leda</a></li>
+            <li><a href="https://coren.da.care/" class="navbar__menu-link">Coren</a></li>
+            <li><a href="/leda-business.html" class="navbar__menu-link">Leda Flow</a></li>
+            <li><a href="/about.html" class="navbar__menu-link">About</a></li>
+            <li><a href="https://www.notion.so/nrg4u/da-care-Press-Pack-30bfb84ddf77801bac91d85c6356d633?source=copy_link" class="navbar__menu-link" target="_blank" rel="noopener noreferrer">Press</a></li>
+            <li><a href="/contact.html" class="navbar__menu-link">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Mobile Navigation Overlay -->
+    <div class="mobile-nav" id="mobile-nav" aria-hidden="true" role="dialog" aria-label="Navigation menu">
+      <a href="/leda.html" class="mobile-nav-link">Leda</a>
+      <a href="https://coren.da.care/" class="mobile-nav-link">Coren</a>
+      <a href="/leda-business.html" class="mobile-nav-link">Leda Flow</a>
+      <a href="/about.html" class="mobile-nav-link">About</a>
+      <a href="https://www.notion.so/nrg4u/da-care-Press-Pack-30bfb84ddf77801bac91d85c6356d633?source=copy_link" target="_blank" class="mobile-nav-link">Press</a>
+      <a href="/contact.html" class="mobile-nav-link mobile-nav-cta">Contact</a>
+    </div>
+    
+
+    <!-- Main Content -->
+    <main id="main">
+
+    <!-- Hero Section -->
+    <section class="hero-sphere-section" id="hero">
+      <canvas id="sphereCanvas"></canvas>
+      <h1 class="hero-sphere-heading" style="font-size: var(--font-h1);">Your da.care system</h1>
+      <div class="hero-sphere-orbits" aria-hidden="true">
+        <img src="/images/Hero/Orbit/Vector.png" alt="" class="hero-sphere-orbit hero-sphere-orbit--a" decoding="async" />
+        <img src="/images/Hero/Orbit/Group 286.png" alt="" class="hero-sphere-orbit hero-sphere-orbit--b" decoding="async" />
+        <img src="/images/Hero/Orbit/Group 285.png" alt="" class="hero-sphere-orbit hero-sphere-orbit--c" decoding="async" />
+      </div>
+      <canvas id="orbiterCanvas"></canvas>
+    </section>
+
+
+<!-- ═══════════ 3 100VH SECTIONS (copied from Leda) ═══════════ -->
+<div class="leda-landing">
+  <!-- Section 1 -->
+  <section class="shaped-section shaped-section--coren" id="section1" style="height: 100vh; display: flex; flex-direction: column;">
+    <div class="shaped-wrap" style="height: 100%; flex: 1;">
+      <div class="shaped-img rv shaped-img--coral">
+        <img src="/images/Hero/cor.webp" alt="Coren" class="shaped-product-img" loading="lazy" decoding="async" />
+      </div>
+      <div class="shaped-copy">
+        <h2 class="shaped-h2 rv rv-d1">Find who you need</h2>
+        <p class="shaped-body rv rv-d2">The matching engine behind da.care. Coren connects you with the right provider based on what actually matters — not keywords, not ads, not luck.</p>
+        <div class="btn-row rv rv-d2">
+          <a class="btn btn--primary btn--coren homepage-hero-btn" href="https://coren.da.care/">Try Coren</a>
+          <a class="btn btn--secondary homepage-hero-btn" href="https://coren.da.care/">Learn More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2 -->
+  <section class="shaped-section shaped-section--leda" style="height: 100vh; display: flex; flex-direction: column;">
+    <div class="shaped-wrap" style="height: 100%; flex: 1;">
+      <div class="shaped-copy" style="border-left: none; border-right: 1px solid var(--border-default);">
+        <h2 class="shaped-h2 rv rv-d1">Your day, lighter</h2>
+        <p class="shaped-body rv rv-d2">A daily assistant your grandmother could use and you'd actually enjoy. Leda handles the mental load — scheduling, decisions, the small stuff — without the scroll trap. Helpful, fun, and built to let you put your phone down.</p>
+        <div class="btn-row rv rv-d2">
+          <a class="btn btn--primary btn--leda homepage-hero-btn" href="https://talk.da.care/leda-waitlist">Join Waitlist</a>
+          <a class="btn btn--secondary homepage-hero-btn" href="/leda.html">Learn More</a>
+        </div>
+      </div>
+      <div class="shaped-img rv shaped-img--leda">
+        <img src="/images/Hero/Leda.webp" alt="Leda" class="shaped-product-img" loading="lazy" decoding="async" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3 -->
+  <section class="shaped-section shaped-section--sky" style="height: 100vh; display: flex; flex-direction: column;">
+    <div class="shaped-wrap" style="height: 100%; flex: 1;">
+      <div class="shaped-img rv shaped-img--sky">
+        <img src="/images/Hero/lf.webp" alt="Flow" class="shaped-product-img" loading="lazy" decoding="async" />
+      </div>
+      <div class="shaped-copy">
+        <h2 class="shaped-h2 rv rv-d1">One place. Clear head.</h2>
+        <p class="shaped-body rv rv-d2">Work and life in a single view — no more 1,200 daily window switches. Flow finds your files, picks the right AI for the task, and reshuffles your priorities the moment things change. Less noise, less anxiety, more of your year back.</p>
+        <div class="btn-row rv rv-d2">
+          <a class="btn btn--primary btn--sky homepage-hero-btn" href="https://tally.so/r/3x5BNr">Book a Walkthrough</a>
+          <a class="btn btn--secondary homepage-hero-btn" href="/leda-business.html">Learn More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+</main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+      <div class="container">
+        <div class="footer__top">
+          <div class="footer__logo-section">
+            <a href="/" class="navbar__logo">
+               <img src="/images/Footer logo.webp" alt="da.care" class="footer__logo-image" />
+            </a>
+          </div>
+          <div class="footer__nav-section">
+            <h4 class="footer__title">Navigation</h4>
+            <nav class="footer__links">
+              <a href="/" class="footer__link">Home</a>
+              <a href="/leda.html" class="footer__link">Leda</a>
+              <a href="https://coren.da.care/" class="footer__link">Coren</a>
+              <a href="/leda-business.html" class="footer__link">Leda Business</a>
+              <a href="/about.html" class="footer__link">About</a>
+              <a href="/contact.html" class="footer__link">Contact</a>
+            </nav>
+          </div>
+          <div class="footer__nav-section">
+            <h4 class="footer__title">Legal</h4>
+            <nav class="footer__links">
+              <a href="https://docs.da.care/terms-conditions" class="footer__link" target="_blank" rel="noopener noreferrer">Terms & Conditions</a>
+              <a href="https://docs.da.care/privacy-policy" class="footer__link" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+            </nav>
+          </div>
+        </div>
+        <div class="footer__bottom">
+          <div class="footer__copyright">
+            Copyright © da.care SA CHE-425.383.392, <img src="/images/switzerland-flag.svg" alt="Switzerland" class="footer__flag" /> Switzerland 2026
+          </div>
+          <div class="footer__social">
+            <a href="https://www.linkedin.com/company/dacarelife/posts/?feedView=all" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="https://www.instagram.com/da.care.life/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+            </a>
+            <a href="https://www.tiktok.com/@da.care.official" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="TikTok">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scripts (deferred) -->
+    <script src="/js/homepage-hero.js" defer></script>
+    <script src="/js/homepage-main.js" defer></script>
+    <script src="/js/main.js" defer></script>
+
+    <!-- Noscript Fallback -->
+    <noscript>
+      <div class="noscript-fallback">
+        <p>
+          JavaScript enhances this site with animations and interactive
+          features. The core content is fully accessible without it.
+        </p>
+      </div>
+    </noscript>
+  </body>
+</html>

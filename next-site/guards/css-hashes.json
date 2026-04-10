@@ -1,0 +1,53 @@
+{
+  "generatedAt": "2026-03-27T10:42:25.940Z",
+  "files": {
+    "css/components.css": {
+      "sha256": "47c8c00494f25d98771abe59d1bb9924ff6c414202142f5fb70081ac260678ce",
+      "size": 7129
+    },
+    "css/global.css": {
+      "sha256": "d2cc4de16de870a618360a45024a7557215fc0fcd5f6a5b6a28977e72c62b754",
+      "size": 6210
+    },
+    "css/pages/about.css": {
+      "sha256": "e041d3204bc558db476179dfffcbdb7cc0a2320f5edda85caa624ffde82004b3",
+      "size": 2115
+    },
+    "css/pages/article.css": {
+      "sha256": "d394efc71ceaa80515100b3279c5ca8d971f2f6c91e3e5ee0fb04bdae0611c0b",
+      "size": 2747
+    },
+    "css/pages/contact.css": {
+      "sha256": "b0de0df636331bf85acc1934aa72d93aa93a1b1460ba9dd701a2fd114de07403",
+      "size": 3345
+    },
+    "css/pages/coren.css": {
+      "sha256": "a68aca3834364a65653cf04cb756571893ad49d3734714341dd3f2d6dd8d1b3e",
+      "size": 18089
+    },
+    "css/pages/home.css": {
+      "sha256": "be47aeb3ae6ab02ec26fd66b6423ce114e0e2a087e52a08bf496c4443a196768",
+      "size": 17884
+    },
+    "css/pages/homepage.css": {
+      "sha256": "66df248ed2b56f48d87121760a6363f19a5c721452ed6a7f392472c1383a3341",
+      "size": 26905
+    },
+    "css/pages/leda-business.css": {
+      "sha256": "50c69b9ff8ca0c13855c68aa3d0fd008e8324757abb067a6c964b39f7e06b00c",
+      "size": 18988
+    },
+    "css/pages/leda.css": {
+      "sha256": "a8535921fdccb5570dbb8f1aae08b421f78e3098819954eea80a1b60538db1d1",
+      "size": 28216
+    },
+    "css/reset.css": {
+      "sha256": "2bd020edcbe2923efbad32c0bccb53f7048b93d3baa8b6b18b2c52990c015374",
+      "size": 815
+    },
+    "css/variables.css": {
+      "sha256": "bc1d610bc7df020ea035de67c5b61a560bcd432b834d3f24d26047e714ad988e",
+      "size": 3418
+    }
+  }
+}

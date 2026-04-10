@@ -1,0 +1,107 @@
+:root {
+  /* ── Colors ── */
+  --coral: #F69B75;
+  --coral-dark: #B46D50;
+  --coral-light: #F5CFBF;
+
+  --mint: #C1DB8D;
+  --mint-dark: #99AE76;
+  --mint-light: #D7E8B5;
+  --mint-saturated: #9DC261;
+
+  --sky: #A9E2FF;
+  --sky-dark: #57B1DE;
+  --sky-light: #DBF3FF;   
+
+  --text-primary: #2F3326;
+  --text-secondary: #525355;
+  --text-tertiary: #898A8D;
+  --text-disabled: #B8B9BB;
+
+  --bg-white: #FAFAFA;
+  --bg-subtle: #ffffff;
+  --surface: #ffffff;
+  --surface-elevated: #ffffff;
+  --surface-glass: rgba(255, 255, 255, 0.72);
+  --surface-glass-strong: rgba(255, 255, 255, 0.84);
+
+  --border-default: rgba(15, 23, 42, 0.1);
+  --border-light: rgba(15, 23, 42, 0.06);
+
+  --gradient: linear-gradient(135deg, #f8fafc 0%, #edf2f7 50%, #e6ecf3 100%);
+  --accent-gradient: linear-gradient(135deg, rgba(182, 204, 176, 0.9) 0%, rgba(183, 220, 255, 0.9) 100%);
+
+  /* ── Typography ── */
+  --font-display: "Plus Jakarta Sans", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+  --font-sans:
+    "Plus Jakarta Sans", "SF Pro Display", system-ui, -apple-system,
+    "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+
+  /* Shifted Scale to accommodate Body min 1.25rem / max 1.5rem */
+  --font-h1: clamp(2.75rem, 5vw + 1.25rem, 4.5rem);
+  --font-h2: clamp(2.25rem, 3.5vw + 1rem, 3.75rem); /* Max 60px */
+  --font-h3: clamp(1.75rem, 2.5vw + 0.875rem, 2.5rem); /* Max 40px */
+  --font-h4: clamp(1.5rem, 2vw + 0.75rem, 2rem);
+  --font-h5: clamp(1.25rem, 1.5vw + 0.625rem, 1.75rem);
+  --font-h6: clamp(1.125rem, 1vw + 0.5rem, 1.25rem);
+  
+  --font-body: clamp(1.25rem, 1vw + 1rem, 1.5rem);
+  --font-body-sm: clamp(1.063rem, 0.5vw + 0.875rem, 1.25rem);
+  --font-caption: clamp(0.875rem, 0.5vw + 0.75rem, 1rem);
+  
+  --line-height-body: 1.7;
+
+  /* ── Spacing (4px grid) ── */
+  --space-0: 0px;
+  --space-0-5: 0.125rem; /* 2px */
+  --space-1: 0.25rem; /* 4px */
+  --space-2: 0.5rem; /* 8px */
+  --space-3: 0.75rem; /* 12px */
+  --space-4: 1rem; /* 16px */
+  --space-5: 1.25rem; /* 20px */
+  --space-6: 1.5rem; /* 24px */
+  --space-8: 2rem; /* 32px */
+  --space-10: 2.5rem; /* 40px */
+  --space-12: 3rem; /* 48px */
+  --space-16: 4rem; /* 64px */
+  --space-20: 5rem; /* 80px */
+  --space-24: 6rem; /* 96px */
+  --space-32: 8rem; /* 128px */
+
+  /* ── Fluid Spacing ── */
+  --section-padding: clamp(2rem, 5vw, 6rem);
+  --container-padding: clamp(1rem, 5vw, 3rem);
+  --card-padding: clamp(1rem, 2.5vw, 1.5rem);
+  --card-radius: clamp(0.5rem, 1.5vw, 0.75rem);
+
+  /* ── Border Radius ── */
+  --radius-sm: 4px;
+  --radius-md: clamp(6px, 1vw, 8px);
+  --radius-lg: clamp(8px, 1.5vw, 12px);
+  --radius-xl: clamp(12px, 2vw, 16px);
+  --radius-2xl: clamp(16px, 2.5vw, 24px);
+  --radius-full: 9999px;
+
+  /* ── Shadows (Apple Style) ── */
+  --shadow-neu: 0 24px 60px rgba(15, 23, 42, 0.08),
+    0 8px 24px rgba(15, 23, 42, 0.05);
+  --shadow-neu-sm: 0 12px 30px rgba(15, 23, 42, 0.08),
+    0 2px 8px rgba(15, 23, 42, 0.04);
+  --shadow-neu-inset: 0 6px 18px rgba(15, 23, 42, 0.08),
+    0 1px 3px rgba(15, 23, 42, 0.05);
+
+  /* ── Animation ── */
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+
+  --duration-fast: 100ms;
+  --duration-normal: 200ms;
+  --duration-medium: 300ms;
+  --duration-slow: 500ms;
+  --duration-slower: 700ms;
+
+  /* ── Layout ── */
+  --max-width: 1600px;
+  --content-width: 650px;
+}
