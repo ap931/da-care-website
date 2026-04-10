@@ -1,108 +1,140 @@
 /* ── Contact Page Styles ── */
 
-/* Hero Section (Reusing structure) */
+/* Hero Section */
 .contact-hero {
-  min-height: 100vh;
+  position: relative;
+  min-height: 80vh; 
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  padding-top: var(--space-24);
-  padding-bottom: var(--space-12);
-  background-image: url('/images/Contact/image_88_img_472e4a14.webp');
-  background-size: cover;
-  background-position: center;
-  color: white;
+  padding-top: var(--space-32);
+  padding-bottom: var(--space-20);
+  background: url('/images/Contact/image_88_img_472e4a14.webp') center/cover no-repeat;
+  overflow: hidden;
+}
+
+.contact-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(1000px 700px at 10% 10%, rgba(246, 155, 117, 0.15) 0%, transparent 60%),
+    radial-gradient(900px 600px at 90% 90%, rgba(169, 226, 255, 0.2) 0%, transparent 60%);
+  z-index: 1;
+  pointer-events: none;
 }
 
 .contact-hero__content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
   max-width: var(--content-width);
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .contact-hero__content h1 {
+  font-family: var(--font-display);
+  font-size: var(--font-h1);
+  margin-bottom: var(--space-6);
   color: #FFFFFF;
 }
 
 .contact-hero__description {
-  font-size: 1.25rem;
-  color: rgba(255, 255, 255, 0.9);
-  margin-bottom: var(--space-8);
+  font-family: var(--font-sans);
+  font-size: var(--font-body);
+  color: rgba(255, 255, 255, 0.85);
+  line-height: var(--line-height-body);
+  margin-bottom: var(--space-10);
+  max-width: 500px;
+  margin-inline: auto;
 }
 
 /* Contact Methods */
 .contact-methods {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: var(--space-8);
-}
-
-@media (min-width: 768px) {
-  .contact-methods {
-    grid-template-columns: repeat(3, 1fr);
-  }
+  margin-top: calc(var(--space-16) * -1);
+  position: relative;
+  z-index: 10;
 }
 
 .contact-method {
-  display: flex;
-  flex-direction: column;
+  padding: var(--space-10);
+  transition: transform var(--duration-medium) var(--ease-smooth);
+}
+
+.contact-method:hover {
+  transform: translateY(-8px);
 }
 
 .contact-method__header {
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-    margin-bottom: var(--space-2);
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
 }
 
 .contact-methods__icon {
-  width: var(--font-h3);
-  height: var(--font-h3);
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-xl);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--text-primary);
   flex-shrink: 0;
 }
 
 .contact-methods__icon svg {
-  width: 100%;
-  height: 100%;
+  width: 24px;
+  height: 24px;
+}
+
+/* Color variations for method icons (Adjusted for h2 at child 1) */
+.contact-method:nth-child(2) .contact-methods__icon { background: var(--sky-light); color: var(--sky-dark); }
+.contact-method:nth-child(3) .contact-methods__icon { background: var(--coral-light); color: var(--coral-dark); }
+.contact-method:nth-child(4) .contact-methods__icon { background: var(--mint-light); color: var(--mint-dark); }
+
+.contact-method h3 {
+  font-family: var(--font-sans);
+  font-size: var(--font-h5);
+  font-weight: 600;
+  margin-bottom: 0;
 }
 
 .contact-method p {
-    margin-left: calc(var(--font-h3) + var(--space-3)); /* Indent description to align with title text */
-    color: var(--text-secondary);
+  color: var(--text-secondary);
+  font-size: var(--font-body-sm);
+  margin-bottom: 0;
+  line-height: 1.6;
 }
 
-/* FAQ Accordion (Replicating Accordion Styles from Coren) */
-/* TODO: Refactor shared styles to components.css in future refactor */
+/* FAQ Section */
 .faq-section {
-  background-image: url('/images/image_2_img_fc2875b3.webp');
-  background-size: cover;
-  background-position: center;
-  color: white; /* Ensure text is readable against the background */
-  padding-block: var(--space-24); /* Increase padding for better visual impact */
-  min-height: 85vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  position: relative;
+  background: linear-gradient(135deg, 
+    rgba(246, 155, 117, 0.12),
+    rgba(193, 219, 141, 0.12),
+    rgba(169, 226, 255, 0.12)
+  );
+  padding-top: var(--space-12);
+  padding-bottom: var(--section-padding);
 }
 
 .faq-container {
-    max-width: 800px; /* Moderate width as requested */
-    width: 100%;
-    margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .faq-title {
-    text-align: center;
-    margin-bottom: var(--space-8);
+  text-align: center;
+  margin-bottom: var(--space-12);
+  font-size: var(--font-h2);
+  font-family: var(--font-display);
 }
 
+/* Accordion */
 .accordion {
   display: flex;
   flex-direction: column;
@@ -110,47 +142,54 @@
 }
 
 .accordion__item {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all var(--duration-medium) var(--ease-smooth);
 }
 
 .accordion__header {
   width: 100%;
   display: flex;
   align-items: center;
-  gap: var(--space-4);
-  padding-block: var(--space-4);
+  justify-content: flex-start;
+  gap: var(--space-6);
+  padding: var(--space-6) var(--space-8);
   background: none;
   border: none;
   cursor: pointer;
   text-align: left;
-  color: white;
+  border-radius: var(--radius-2xl);
 }
 
 .accordion__icon {
-  width: 24px;
-  height: 24px;
-  border-radius: var(--radius-full);
-  background-color: var(--brand-accent);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
-}
-
-.accordion__header h3 {
-  margin-bottom: 0;
-  flex-grow: 1;
 }
 
 .accordion__content {
   max-height: 0;
   overflow: hidden;
-  transition: max-height var(--duration-medium) var(--ease-smooth);
+  transition: max-height var(--duration-slow) var(--ease-smooth);
 }
 
 .accordion__inner {
-  padding-bottom: var(--space-4);
-  padding-left: calc(24px + var(--space-4));
+  padding: 0 var(--space-8) var(--space-8) 62px;
   color: var(--text-secondary);
+  font-size: var(--font-body-sm);
+  line-height: 1.7;
 }
 
 .accordion__item.active .accordion__content {
-  max-height: 200px;
+  max-height: 600px;
+}
+
+@media (max-width: 600px) {
+  .contact-methods {
+    grid-template-columns: 1fr;
+    margin-top: 0;
+  }
 }

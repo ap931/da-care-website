@@ -96,10 +96,10 @@
   flex-shrink: 0;
 }
 
-/* Color variations for method icons */
-.contact-method:nth-child(1) .contact-methods__icon { background: var(--mint-light); color: var(--mint-dark); }
+/* Color variations for method icons (Adjusted for h2 at child 1) */
 .contact-method:nth-child(2) .contact-methods__icon { background: var(--sky-light); color: var(--sky-dark); }
 .contact-method:nth-child(3) .contact-methods__icon { background: var(--coral-light); color: var(--coral-dark); }
+.contact-method:nth-child(4) .contact-methods__icon { background: var(--mint-light); color: var(--mint-dark); }
 
 .contact-methods__icon svg {
   width: 24px;
