@@ -427,12 +427,12 @@ body.mobile-nav-open {
   width: auto;
   object-fit: contain;
   margin-bottom: var(--space-4);
-  filter: drop-shadow(0 4px 12px rgba(15, 23, 42, 0.03)) grayscale(100%) opacity(0.8);
+  filter: drop-shadow(0 4px 12px rgba(15, 23, 42, 0.03));
   transition: filter var(--duration-medium) var(--ease-smooth), transform var(--duration-medium) var(--ease-smooth);
 }
 
 .footer__logo-image:hover {
-  filter: drop-shadow(0 6px 16px rgba(15, 23, 42, 0.06)) grayscale(0%) opacity(1);
+  filter: drop-shadow(0 6px 16px rgba(15, 23, 42, 0.06));
   transform: translateY(-1px);
 }
 
