@@ -167,65 +167,6 @@ body.homepage.homepage-hero--static .hero-sphere-heading {
   .hero-sphere-orbit { animation: none; }
 }
 
-/* ── Revert leda.css footer overrides on homepage ── */
-body.homepage .footer {
-  background-color: var(--surface);
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-  border-top: 1px solid var(--border-light);
-  overflow: visible;
-  padding-block: revert;
-}
-
-body.homepage .footer::before {
-  display: none;
-}
-
-body.homepage .footer__logo-image {
-  height: clamp(48px, 6vw, 72px);
-  filter: drop-shadow(0 4px 12px rgba(15, 23, 42, 0.03));
-}
-
-body.homepage .footer__title {
-  text-transform: none;
-  letter-spacing: normal;
-  color: var(--text-secondary);
-}
-
-body.homepage .footer__link {
-  font-size: inherit;
-  font-weight: inherit;
-}
-
-body.homepage .footer__link:hover {
-  color: var(--text-primary);
-  transform: none;
-}
-
-body.homepage .footer__bottom {
-  border-top: 1px solid var(--border-light);
-  padding-top: var(--space-8);
-  margin-top: 0;
-}
-
-body.homepage .footer__copyright {
-  color: var(--text-secondary);
-}
-
-body.homepage .social-icon {
-  background: var(--surface);
-  border-color: var(--border-light);
-  backdrop-filter: none;
-}
-
-body.homepage .social-icon:hover {
-  background: var(--text-primary);
-  border-color: var(--text-primary);
-  color: var(--surface);
-  transform: translateY(-2px);
-  box-shadow: none;
-}
-
 /* ── Shaped Sections Theming ── */
 .shaped-section--coren {
   background: linear-gradient(180deg, var(--bg-white) 0%, rgba(246, 155, 117, 0.04) 100%);
