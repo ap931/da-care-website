@@ -4,16 +4,14 @@
 
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   const allowMotion = () => !prefersReduced.matches;
-  const shouldUseLottie = () => allowMotion();
   const shapedScene = root.querySelector('.shaped-img');
   const shapedGradientCanvas = root.querySelector('#shaped-gradient');
-  const shapedLottieMount = root.querySelector('#shaped-lottie');
+  const shapedVideo = root.querySelector('#shaped-video');
   const shapedPoster = root.querySelector('.shaped-poster');
   let shapedSceneRevealed = false;
   let shapedSceneVisible = false;
   let shapedGradient = null;
-  let shapedLottie = null;
-  let lottieLoader = null;
+  let shapedVideoLoaded = false;
 
   const setShapedFallback = (enabled) => {
     const shapedSceneRoot = shapedGradientCanvas?.closest('.shaped-scene');
@@ -24,26 +22,6 @@
     }
   };
 
-  const loadLottieScript = () => {
-    if (window.lottie || window.bodymovin) {
-      return Promise.resolve(window.lottie || window.bodymovin);
-    }
-
-    if (lottieLoader) {
-      return lottieLoader;
-    }
-
-    lottieLoader = new Promise((resolve, reject) => {
-      const script = document.createElement('script');
-      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js';
-      script.async = true;
-      script.onload = () => resolve(window.lottie || window.bodymovin);
-      script.onerror = reject;
-      document.head.appendChild(script);
-    });
-
-    return lottieLoader;
-  };
 
   const initShapedGradient = () => {
     if (!shapedSceneRevealed || !shapedGradientCanvas || shapedGradient) return;
@@ -324,44 +302,21 @@
     shapedGradient = state;
   };
 
-  const initShapedLottie = async () => {
-    if (!shapedSceneRevealed || !shapedLottieMount) return;
-    if (!shouldUseLottie()) {
-      setShapedFallback(true);
-      return;
+  const updateShapedVideo = () => {
+    if (!shapedVideo) return;
+
+    if (!shapedSceneRevealed) return;
+
+    // Trigger load on first reveal (preload="none")
+    if (!shapedVideoLoaded) {
+      shapedVideoLoaded = true;
+      shapedVideo.load();
     }
-    if (shapedLottie) return;
 
-    try {
-      const lottieApi = await loadLottieScript();
-      if (!lottieApi || shapedLottie || !shouldUseLottie()) {
-        setShapedFallback(true);
-        return;
-      }
-
-      shapedLottie = lottieApi.loadAnimation({
-        container: shapedLottieMount,
-        renderer: 'svg',
-        loop: allowMotion(),
-        autoplay: false,
-        path: '/images/Leda/Scene-1.json',
-        rendererSettings: {
-          preserveAspectRatio: 'xMidYMid meet',
-          progressiveLoad: true
-        }
-      });
-
-      setShapedFallback(false);
-
-      shapedLottie.addEventListener('DOMLoaded', () => {
-        if (!allowMotion() || !shapedSceneVisible || document.hidden) {
-          shapedLottie.goToAndStop(0, true);
-        } else {
-          shapedLottie.play();
-        }
-      });
-    } catch (error) {
-      setShapedFallback(true);
+    if (allowMotion() && shapedSceneVisible && !document.hidden) {
+      shapedVideo.play().catch(() => {});
+    } else {
+      shapedVideo.pause();
     }
   };
 
@@ -369,20 +324,7 @@
     if (!shapedSceneRevealed) return;
 
     initShapedGradient();
-    if (shouldUseLottie()) {
-      initShapedLottie();
-    } else {
-      setShapedFallback(true);
-    }
-
-    if (shapedLottie) {
-      if (allowMotion() && shapedSceneVisible && !document.hidden && shouldUseLottie()) {
-        shapedLottie.play();
-      } else {
-        shapedLottie.pause();
-        shapedLottie.goToAndStop(0, true);
-      }
-    }
+    updateShapedVideo();
 
     if (shapedGradient) {
       if (allowMotion() && shapedSceneVisible && !document.hidden) {
@@ -597,16 +539,10 @@
     if (document.hidden) {
       stopCycle();
       if (shapedGradient) shapedGradient.stop();
-      if (shapedLottie) {
-        shapedLottie.pause();
-        shapedLottie.goToAndStop(0, true);
-      }
+      if (shapedVideo) shapedVideo.pause();
     } else {
       startCycle();
       if (shapedSceneRevealed) activateShapedScene();
-      if (shapedLottie && allowMotion() && shapedSceneVisible && shouldUseLottie()) {
-        shapedLottie.play();
-      }
     }
   });
 
@@ -614,25 +550,13 @@
     if (allowMotion()) {
       startCycle();
       if (shapedSceneRevealed) activateShapedScene();
-      if (shapedLottie && shouldUseLottie()) {
-        shapedLottie.loop = true;
-        shapedLottie.play();
-      } else if (shouldUseLottie()) {
-        initShapedLottie();
-      } else {
-        setShapedFallback(true);
-      }
     } else {
       stopCycle();
       if (shapedGradient) {
         shapedGradient.stop();
         shapedGradient.draw();
       }
-      if (shapedLottie) {
-        shapedLottie.loop = false;
-        shapedLottie.goToAndStop(0, true);
-      }
-      setShapedFallback(true);
+      if (shapedVideo) shapedVideo.pause();
     }
   };
 
