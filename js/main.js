@@ -65,8 +65,9 @@ if (heroImage) {
   heroImage.style.transform = `rotateX(${maxTilt}deg) translateY(60px) scale(0.85)`;
   heroImage.style.transition = 'none';
 
+  let perspRaf = 0;
   window.addEventListener('scroll', () => {
-    requestAnimationFrame(updatePerspective);
+    if (!perspRaf) perspRaf = requestAnimationFrame(() => { perspRaf = 0; updatePerspective(); });
   }, { passive: true });
 
   // Run once on load
@@ -95,8 +96,9 @@ if (visionImage) {
   visionImage.style.transform = `rotateX(${maxTilt}deg) translateY(60px) scale(0.85)`;
   visionImage.style.transition = 'none';
 
+  let visionRaf = 0;
   window.addEventListener('scroll', () => {
-    requestAnimationFrame(updateVisionPerspective);
+    if (!visionRaf) visionRaf = requestAnimationFrame(() => { visionRaf = 0; updateVisionPerspective(); });
   }, { passive: true });
 
   updateVisionPerspective();
@@ -118,11 +120,50 @@ if (heroSection && heroSticky) {
     }
   };
 
+  let parallaxRaf = 0;
   window.addEventListener('scroll', () => {
-    requestAnimationFrame(updateHeroParallax);
+    if (!parallaxRaf) parallaxRaf = requestAnimationFrame(() => { parallaxRaf = 0; updateHeroParallax(); });
   }, { passive: true });
 
   updateHeroParallax();
+}
+
+// ── Scroll-driven Perspective Reveal (Task Screen) ──
+const taskScreenImg = document.querySelector('.task-screen-img');
+if (taskScreenImg) {
+  const taskSection = taskScreenImg.closest('.task-screen-section');
+
+  if (!taskSection) {
+    // Fallback: no wrapper found — show image flat
+    taskScreenImg.style.transform = 'none';
+    taskScreenImg.style.opacity = '1';
+  } else {
+    const updateTaskScreen = () => {
+      const rect = taskSection.getBoundingClientRect();
+      const viewH = window.innerHeight;
+      // entry: fraction of section that has entered the viewport from the bottom
+      // 0 = top edge at viewport bottom, 1 = top edge at viewport top
+      const entry = Math.max(0, viewH - rect.top) / rect.height;
+      // progress: 0 at 50% entry (trigger), 1 at 100% entry (fully in)
+      const progress = Math.min(Math.max((entry - 0.5) * 2, 0), 1);
+
+      const tilt = 30 * (1 - progress);
+      taskScreenImg.style.transform = `perspective(1200px) rotateX(${tilt.toFixed(2)}deg)`;
+      taskScreenImg.style.opacity = String((0.5 + 0.5 * progress).toFixed(3));
+    };
+
+    // Hard initial state (matches CSS fallback)
+    taskScreenImg.style.transform = 'perspective(1200px) rotateX(30deg)';
+    taskScreenImg.style.opacity = '0.5';
+    taskScreenImg.style.transition = 'none';
+
+    let taskRaf = 0;
+    window.addEventListener('scroll', () => {
+      if (!taskRaf) taskRaf = requestAnimationFrame(() => { taskRaf = 0; updateTaskScreen(); });
+    }, { passive: true });
+
+    updateTaskScreen();
+  }
 }
 
 // Navbar Scroll Blur Effect + Homepage Hide-On-Scroll

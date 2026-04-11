@@ -14,7 +14,6 @@ const initSphere = () => {
     const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     const isLowPowerDevice = () =>
         reducedMotionQuery.matches ||
-        window.innerWidth < 960 ||
         (navigator.deviceMemory && navigator.deviceMemory <= 4);
 
     const setStaticMode = (enabled) => {
@@ -63,7 +62,9 @@ const initSphere = () => {
     const PARTICLE_COUNT =
         window.innerWidth >= 1600 ? 2800 :
         window.innerWidth >= 1280 ? 2400 :
-        1900;
+        window.innerWidth >= 900  ? 1900 :
+        window.innerWidth >= 600  ? 1200 :
+        800;
     const phi = Math.PI * (3 - Math.sqrt(5));
     const GRAD_X = 0.574;
     const GRAD_Y = -0.819;

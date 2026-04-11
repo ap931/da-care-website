@@ -17,6 +17,7 @@
               inset 0 1px 0 rgba(255, 255, 255, 0.9);
   padding-block: 0;
   transition: transform 400ms ease-out,
+              opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
               background var(--duration-normal) var(--ease-smooth),
               border-color var(--duration-normal) var(--ease-smooth),
               box-shadow var(--duration-normal) var(--ease-smooth),
@@ -89,7 +90,7 @@
   }
 
   .navbar__logo-image {
-    height: 36px;
+    height: 32px;
   }
 }
 

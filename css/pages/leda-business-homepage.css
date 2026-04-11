@@ -308,24 +308,27 @@
   .task-screen-wrap {
     width: 94%;
     max-width: 1150px;
-    perspective: 900px;
     position: relative;
+    margin: 0 auto;
   }
   .task-screen-aura {
     position: absolute;
     inset: -60px;
-    background: radial-gradient(circle at 50% 50%, var(--brand-accent), transparent 60%);
+    background: radial-gradient(circle at 50% 50%, var(--sky-dark), transparent 60%);
     opacity: 0;
-    filter: blur(80px);
+    filter: blur(55px);
     z-index: 0;
-    transform: translateY(40px) scale(0.8);
-    animation: task-aura-bloom linear both;
-    animation-timeline: view();
-    animation-range: entry 50% entry 100%;
+  }
+  @supports (animation-timeline: view()) {
+    .task-screen-aura {
+      animation: task-aura-bloom linear both;
+      animation-timeline: view();
+      animation-range: entry 30% cover 10%;
+    }
   }
   @keyframes task-aura-bloom {
-    from { opacity: 0; transform: translateY(40px) scale(0.8); }
-    to { opacity: 0.25; transform: translateY(0px) scale(1.1); }
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 0.45; transform: scale(1.1); }
   }
   .task-screen-img {
     width: 100%;
@@ -335,20 +338,13 @@
       0 16px 40px rgba(0,0,0,0.10),
       0 0 0 1px rgba(0,0,0,0.05);
     display: block;
-    transform-origin: center top;
+    transform-origin: center bottom;
     position: relative;
     z-index: 1;
-    animation: task-screen-lift linear both;
-    animation-timeline: view();
-    animation-range: entry 50% entry 100%;
-  }
-  @keyframes task-screen-lift {
-    from {
-      transform: rotateX(30deg) translateY(60px) scale(0.92);
-    }
-    to {
-      transform: rotateX(0deg) translateY(0px) scale(1);
-    }
+    will-change: transform, opacity;
+    /* Initial state set by JS — perspective(1200px) rotateX(30deg) */
+    transform: perspective(1200px) rotateX(30deg);
+    opacity: 0.5;
   }
 
   /* ═══════════ METRICS ═══════════ */
@@ -478,11 +474,9 @@
     .notif.sm { width: 170px; min-height: 46px; height: auto; }
     .notif.md { width: 210px; min-height: 52px; height: auto; }
 
-    .task-screen-wrap { width: 108%; max-width: 140%; left: -4%; }
-    .task-screen-img {
-      transform-origin: center top;
-      animation-range: entry 70% cover 15%;
-    }
+    .task-screen-wrap { width: 100%; max-width: 100%; left: auto; }
+    .task-screen-section { padding: clamp(40px, 8vh, 80px) 16px; }
+    .task-screen-img { animation-range: entry 20% cover 15%; }
   }
   @media(max-width:600px) {
     .n-title { font-size: 12px; }

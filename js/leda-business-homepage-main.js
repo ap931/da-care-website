@@ -37,7 +37,6 @@
   let cachedScrollY = window.scrollY || 0;
   let isCompactMobile = false;
   let isNarrowMobile = false;
-  let notifStride = 1;
   let currentText = 1;
   let lastRenderedProgress = -1;
   let rafId = null;
@@ -60,21 +59,26 @@
   });
 
   const positions = [
-    { x: 4, y: 5 }, { x: 28, y: 2 }, { x: 52, y: 4 }, { x: 74, y: 3 },
-    { x: 92, y: 8 }, { x: 16, y: 18 }, { x: 40, y: 12 }, { x: 64, y: 16 },
-    { x: 88, y: 22 }, { x: 6, y: 26 }, { x: 50, y: 24 }, { x: 78, y: 28 },
-    { x: 1, y: 38 }, { x: 3, y: 56 },
-    { x: 90, y: 42 }, { x: 92, y: 60 },
-    { x: 4, y: 72 }, { x: 22, y: 78 }, { x: 44, y: 70 }, { x: 66, y: 74 },
-    { x: 88, y: 76 }, { x: 12, y: 86 }, { x: 36, y: 90 }, { x: 58, y: 84 },
-    { x: 80, y: 88 }, { x: 96, y: 92 }, { x: 26, y: 96 }, { x: 68, y: 94 },
-    { x: 10, y: 10 }, { x: 35, y: 8 }, { x: 80, y: 14 },
-    { x: 5, y: 48 }, { x: 8, y: 65 }, { x: 85, y: 35 },
-    { x: 95, y: 50 }, { x: 88, y: 68 }, { x: 15, y: 95 },
-    { x: 50, y: 98 }, { x: 75, y: 80 }, { x: 90, y: 98 },
-    { x: 20, y: 34 }, { x: 46, y: 44 }, { x: 72, y: 38 },
-    { x: 30, y: 58 }, { x: 56, y: 52 }, { x: 18, y: 50 },
-    { x: 43, y: 30 }, { x: 78, y: 52 },
+    // ── Top band row 1 (y ≈ 4-8%, full width) ──
+    { x: 6,  y: 5  }, { x: 17, y: 3  }, { x: 28, y: 6  }, { x: 39, y: 4  },
+    { x: 51, y: 5  }, { x: 62, y: 3  }, { x: 73, y: 6  }, { x: 84, y: 4  },
+    // ── Top band row 2 (y ≈ 14-20%, full width) ──
+    { x: 11, y: 16 }, { x: 23, y: 13 }, { x: 35, y: 19 }, { x: 47, y: 14 },
+    { x: 59, y: 18 }, { x: 71, y: 15 }, { x: 82, y: 20 }, { x: 90, y: 13 },
+    // ── Top band row 3 (y ≈ 27-33%, sides only — avoids center text) ──
+    { x: 8,  y: 28 }, { x: 20, y: 32 }, { x: 78, y: 27 }, { x: 89, y: 31 },
+    // ── Left lane (x ≈ 6-14%, y ≈ 38-66%) ──
+    { x: 7,  y: 38 }, { x: 11, y: 46 }, { x: 6,  y: 54 }, { x: 13, y: 62 }, { x: 9,  y: 42 },
+    // ── Right lane (x ≈ 85-93%, y ≈ 38-66%) ──
+    { x: 88, y: 39 }, { x: 85, y: 48 }, { x: 91, y: 57 }, { x: 87, y: 65 }, { x: 90, y: 43 },
+    // ── Bottom band row 1 (y ≈ 71-76%, full width) ──
+    { x: 7,  y: 72 }, { x: 19, y: 74 }, { x: 31, y: 71 }, { x: 44, y: 75 },
+    { x: 57, y: 72 }, { x: 69, y: 74 }, { x: 81, y: 71 }, { x: 91, y: 74 },
+    // ── Bottom band row 2 (y ≈ 82-89%, full width) ──
+    { x: 13, y: 83 }, { x: 26, y: 88 }, { x: 40, y: 82 }, { x: 54, y: 87 },
+    { x: 66, y: 83 }, { x: 78, y: 89 }, { x: 87, y: 84 }, { x: 20, y: 86 },
+    // ── Bottom band row 3 (y ≈ 93-96%, sparse) ──
+    { x: 33, y: 94 }, { x: 60, y: 93 },
   ];
   const popStarts = positions.map((_, index) => 0.01 + (index / (NOTIF_COUNT - 1)) * 0.37);
   const popDuration = 0.04;
@@ -109,23 +113,6 @@
   function updateNotifSizes() {
     for (let index = 0; index < NOTIF_COUNT; index += 1) {
       const notif = notifs[index];
-      const hideOnMobile = isNarrowMobile && index >= NOTIF_COUNT * 0.8;
-
-      if ((notifStride > 1 && index % notifStride !== 0) || hideOnMobile) {
-        notifSizes[index].w = 0;
-        notifSizes[index].h = 0;
-        notifVisible[index] = false;
-        notifAbsorbing[index] = false;
-
-        if (notif) {
-          notif.style.visibility = 'hidden';
-          notif.style.opacity = '0';
-          notif.style.transform = 'translate3d(0, 0, 0) scale(0)';
-          notif.classList.remove('absorbing');
-        }
-
-        continue;
-      }
 
       if (!notif) {
         notifSizes[index].w = 0;
@@ -147,7 +134,6 @@
     scrollRange = Math.max(1, outerH - winH) / 0.86;
     isCompactMobile = window.innerWidth < 480;
     isNarrowMobile = window.innerWidth < 600;
-    notifStride = isCompactMobile ? 3 : (isNarrowMobile ? 2 : 1);
   }
 
   function handleResize() {
@@ -227,19 +213,6 @@
         return;
       }
 
-      const hideOnMobile = isNarrowMobile && index >= NOTIF_COUNT * 0.8;
-      if ((notifStride > 1 && index % notifStride !== 0) || hideOnMobile) {
-        if (notifVisible[index]) {
-          notifVisible[index] = false;
-          notifAbsorbing[index] = false;
-          notif.classList.remove('absorbing');
-          notif.style.visibility = 'hidden';
-          notif.style.opacity = '0';
-          notif.style.transform = 'translate3d(0, 0, 0) scale(0)';
-        }
-        return;
-      }
-
       const popStart = popStarts[index];
       const popEnd = popStart + popDuration;
       const popP = clamp((progress - popStart) / (popEnd - popStart), 0, 1);
@@ -297,6 +270,11 @@
           targetY = textBottom + ((index % 3) * 4);
         }
       }
+
+      // Clamp within container bounds so overflow:hidden doesn't clip notifications
+      const pad = 4;
+      targetX = Math.max(pad, Math.min(vw - width - pad, targetX));
+      targetY = Math.max(pad, Math.min(vh - height - pad, targetY));
 
       const absorbP = clamp((progress - absorbStart) / (absorbEnd - absorbStart), 0, 1);
       const absorbEased = easeInOut(absorbP);

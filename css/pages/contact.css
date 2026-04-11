@@ -3,12 +3,14 @@
 /* ── Hero section ── */
 .contact-hero {
   position: relative;
-  min-height: 80vh; 
+  height: 80vh;
+  min-height: 520px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: var(--space-32);
-  padding-bottom: var(--space-20);
+  padding-top: clamp(90px, 12vh, 128px);
+  padding-bottom: var(--space-12);
+  box-sizing: border-box;
   background: url('/images/Contact/sunset-snowy-mountain-range.jpeg') center/cover no-repeat;
   overflow: hidden;
 }
@@ -252,8 +254,10 @@
 /* ── Responsive Refinements ── */
 @media (max-width: 600px) {
   .contact-hero {
-    min-height: auto;
+    height: auto;
+    min-height: 520px;
     padding-top: var(--space-24);
+    padding-bottom: var(--space-12);
   }
   
   .contact-methods {
