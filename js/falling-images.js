@@ -54,7 +54,7 @@ const fallingImagesConfig = {
 
 function initFallingImages(containerId, canvasId) {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const isLowPowerDevice = prefersReducedMotion || (navigator.deviceMemory && navigator.deviceMemory <= 4);
+  const isLowPowerDevice = prefersReducedMotion || (navigator.deviceMemory && navigator.deviceMemory < 3);
   if (isLowPowerDevice) return;
 
   const container = document.getElementById(containerId);
