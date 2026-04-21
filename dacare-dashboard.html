@@ -1,0 +1,1153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>da.care — Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/variables.css"><link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+<div class="app">
+  <!-- HEADER -->
+  <header class="header">
+    <a href="/" class="brand" aria-label="da.care Home">
+      <img src="/images/Footer logo.webp" alt="da.care" style="height: 32px; width: auto; object-fit: contain; display: block;" />
+    </a>
+
+    <!-- Workspace context / navigation -->
+    <nav class="header-nav" aria-label="Workspace switcher">
+      <button class="ws-switcher" id="ws-trigger" onclick="toggleWsPanel(event)" aria-haspopup="true" aria-expanded="false">
+        <div class="ws-switcher-avatar" id="ws-switcher-avatar" aria-hidden="true"></div>
+        <div class="ws-switcher-text">
+          <div class="ws-switcher-name" id="ws-switcher-name"></div>
+          <div class="ws-switcher-role eyebrow" id="ws-switcher-role" style="font-size: 9px; letter-spacing: 0.1em; color: var(--text-soft);"></div>
+        </div>
+        <div class="ws-switcher-chevron" aria-hidden="true" style="opacity: 0.5;">▼</div>
+      </button>
+    </nav>
+
+    <!-- Right-side actions -->
+    <nav class="header-right" aria-label="User actions">
+      <button class="icon-btn" aria-label="Search">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      </button>
+      <button class="icon-btn" onclick="toggleTheme()" aria-label="Toggle theme">
+        <svg id="theme-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"></svg>
+      </button>
+      <button class="icon-btn" aria-label="Notifications">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M18 8a6 6 0 00-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+        <div class="dot" id="notif-dot"></div>
+      </button>
+      <div class="avatar" id="avatar-trigger" onclick="toggleIdPanel(event)" aria-label="User menu" aria-haspopup="true" aria-expanded="false">AK</div>
+    </nav>
+  </header>
+
+  <!-- WORKSPACE PANEL -->
+  <div class="dropdown-panel ws-panel" id="ws-panel">
+    <div class="ws-panel-section">
+      <div class="ws-panel-label">Personal</div>
+      <div id="ws-personal"></div>
+    </div>
+    <div class="ws-panel-section">
+      <div class="ws-panel-label">Professional</div>
+      <div id="ws-professional"></div>
+    </div>
+    <div class="ws-panel-section" id="ws-invites-section">
+      <div class="ws-panel-label">Pending invitations</div>
+      <div id="ws-invites"></div>
+    </div>
+    <div class="ws-panel-footer">
+      <button>＋ Create workspace</button>
+      <button>⌲ Join a team</button>
+    </div>
+  </div>
+
+  <!-- ============ IDENTITY PANEL ============ -->
+  <div class="dropdown-panel id-panel" id="id-panel">
+    <div class="id-panel-head">
+      <div class="id-name">Alex <em style="font-style:italic; color:var(--text-muted)">Kovachev</em></div>
+      <div class="id-email">alex@kovachev.co</div>
+    </div>
+    <button class="id-menu-item" onclick="openIdPage('growth')">
+      <span class="glyph"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 17l6-6 4 4 8-8M14 7h7v7"/></svg></span>
+      Growth & referrals
+      <span class="trailing">142 credits</span>
+    </button>
+    <button class="id-menu-item" onclick="openIdPage('invitations')">
+      <span class="glyph"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 7l8 6 8-6M4 5h16a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V6a1 1 0 011-1z"/></svg></span>
+      Invitations
+      <span class="trailing" style="color:var(--coren)">1 new</span>
+    </button>
+    <button class="id-menu-item" onclick="openIdPage('plans')">
+      <span class="glyph"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg></span>
+      Plans & billing
+    </button>
+    <div class="id-menu-divider"></div>
+    <button class="id-menu-item" onclick="openIdPage('account')">
+      <span class="glyph"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a7 7 0 0114 0v1"/></svg></span>
+      Account & privacy
+    </button>
+    <button class="id-menu-item">
+      <span class="glyph"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v6M12 17v6M4.2 4.2l4.3 4.3M15.5 15.5l4.3 4.3M1 12h6M17 12h6M4.2 19.8l4.3-4.3M15.5 8.5l4.3-4.3"/></svg></span>
+      Preferences
+    </button>
+    <div class="id-menu-divider"></div>
+    <button class="id-menu-item danger">
+      <span class="glyph"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg></span>
+      Sign out
+    </button>
+  </div>
+
+  <!-- ============ MAIN ============ -->
+  <main class="main">
+
+    <!-- WORKSPACE HOME -->
+    <section class="page visible" id="page-home">
+      <div class="ws-band">
+        <div class="ws-band-left">
+          <div class="eyebrow" id="ws-eyebrow"></div>
+          <h1 id="ws-title"></h1>
+          <div class="ws-band-meta" id="ws-meta"></div>
+        </div>
+        <div class="page-nav">
+          <button class="active" onclick="setSubPage('home', this)">Overview</button>
+          <button onclick="setSubPage('billing', this)">Billing</button>
+          <button onclick="setSubPage('members', this)" id="subpage-members">Members</button>
+        </div>
+      </div>
+
+      <!-- SUB: OVERVIEW -->
+      <div class="sub" id="sub-home">
+        <div class="eyebrow" style="margin-bottom:10px;">Your three products in this workspace</div>
+        <div class="product-grid" id="product-grid"></div>
+
+        <div class="cols-2-1">
+          <div class="card" id="side-card">
+            <!-- filled by context -->
+          </div>
+        </div>
+      </div>
+
+
+
+      <!-- SUB: BILLING -->
+      <div class="sub" id="sub-billing" style="display:none;">
+        <div class="card">
+          <h3>Subscriptions in this workspace</h3>
+          <p class="card-desc">Each product has its own plan. Billing depends on who created this workspace.</p>
+          <div id="billing-list"></div>
+        </div>
+      </div>
+
+      <!-- SUB: MEMBERS -->
+      <div class="sub" id="sub-members" style="display:none;">
+        <div class="card">
+          <h3 id="members-title">Members</h3>
+          <p class="card-desc" id="members-desc"></p>
+          <div id="members-list"></div>
+          <div style="margin-top:18px; display:flex; gap:8px;">
+            <button class="btn" id="members-invite-btn">＋ Invite member</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLANS PAGE (identity-level) -->
+    <section class="page" id="page-plans">
+      <div class="ws-band">
+        <div class="ws-band-left">
+          <div class="eyebrow">Identity-level · across workspaces</div>
+          <h1>Plans &amp; <em>billing</em></h1>
+          <div class="ws-band-meta">Each product is priced on its own terms. Bundles sit on top — a Personal Suite or Business Suite is a <em>combination</em> of product plans, not a separate tier.</div>
+        </div>
+      </div>
+
+      <div class="plan-tabs">
+        <button class="plan-tab active" data-plan="leda" onclick="setPlanTab('leda', this)">
+          <span class="tab-mark" style="background:var(--leda-bg); color:var(--leda-ink);"><em>L</em></span>
+          Leda
+        </button>
+        <button class="plan-tab" data-plan="ledaflow" onclick="setPlanTab('ledaflow', this)">
+          <span class="tab-mark" style="background:var(--ledaflow-bg); color:var(--ledaflow-ink);"><em>F</em></span>
+          Leda Flow
+        </button>
+        <button class="plan-tab" data-plan="coren" onclick="setPlanTab('coren', this)">
+          <span class="tab-mark" style="background:var(--coren-bg); color:var(--coren-ink);"><em>C</em></span>
+          Coren
+        </button>
+        <div style="width:0.5px; background:var(--border); margin:4px 6px;"></div>
+        <button class="plan-tab" data-plan="bundle" onclick="setPlanTab('bundle', this)">
+          Bundles
+        </button>
+      </div>
+
+      <div id="plan-grid" class="plan-grid"></div>
+      <p id="plan-context" style="margin-top:20px; font-size: var(--font-caption); color:var(--text-soft); text-align:center;"></p>
+    </section>
+
+    <!-- GROWTH PAGE (identity-level) -->
+    <section class="page" id="page-growth">
+      <div class="ws-band">
+        <div class="ws-band-left">
+          <div class="eyebrow">Identity-level · follows you across workspaces</div>
+          <h1>Growth &amp; <em>referrals</em></h1>
+          <div class="ws-band-meta">Earning is at your identity level. When you redeem a reward, you pick which workspace gets the upgrade.</div>
+        </div>
+      </div>
+
+      <div class="cols-2-1">
+        <div class="card">
+          <h3>Invite friends, unlock rewards</h3>
+          <p class="card-desc">2 friends have joined · 3 to go before your next reward</p>
+          <div style="margin:18px 0 14px;">
+            <div class="progress-rail"><div class="progress-fill" style="width:40%;"></div></div>
+            <div style="display:flex; justify-content:space-between; margin-top:8px; font-size: var(--font-caption); color:var(--text-soft);">
+              <span>2 of 5 friends</span>
+              <span style="color:var(--ledaflow); font-weight:500;">Next: 30 days Plus — redeem anywhere</span>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:8px; margin:20px 0 8px;">
+            <input type="text" readonly value="da.care/invite/alex-k-7f3a" style="flex:1; padding:10px 12px; border-radius:9px; border:0.5px solid var(--border-strong); background:var(--surface-sunken); color:var(--text-muted); font-size: var(--font-caption);">
+            <button class="btn">Copy link</button>
+          </div>
+
+          <div class="divider"></div>
+
+          <div style="font-size: var(--font-caption); letter-spacing:0.12em; text-transform:uppercase; color:var(--text-soft); font-weight:500; margin-bottom:12px;">Milestone ladder</div>
+          <div id="milestones"></div>
+        </div>
+
+        <div class="card">
+          <h3>Ledger</h3>
+          <p class="card-desc">Your growth credits and activation status</p>
+          <div class="mini-stat-grid">
+            <div class="mini-stat">
+              <div class="mini-stat-value">142</div>
+              <div class="mini-stat-label">Credits</div>
+            </div>
+            <div class="mini-stat">
+              <div class="mini-stat-value">2</div>
+              <div class="mini-stat-label">Friends joined</div>
+            </div>
+          </div>
+          <div class="divider"></div>
+
+          <div style="font-size: var(--font-caption); letter-spacing:0.12em; text-transform:uppercase; color:var(--text-soft); font-weight:500; margin-bottom:14px;">Product activation</div>
+          <div id="activation-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INVITATIONS PAGE -->
+    <section class="page" id="page-invitations">
+      <div class="ws-band">
+        <div class="ws-band-left">
+          <div class="eyebrow">Identity-level inbox</div>
+          <h1><em>Invitations</em></h1>
+          <div class="ws-band-meta">Accept to add the workspace to your switcher. Decline to remove it from view.</div>
+        </div>
+      </div>
+
+      <div id="invites-list"></div>
+
+      <div class="card" style="margin-top:14px; text-align:center; padding:40px;">
+        <div style="font-size: var(--font-h2); opacity:0.2; margin-bottom:10px;">⌲</div>
+        <h3 style="margin-bottom:6px;">Want to collaborate somewhere new?</h3>
+        <p class="card-desc" style="margin-bottom:16px;">Ask the workspace owner to send you an invite. It'll land here.</p>
+      </div>
+    </section>
+
+    <!-- ACCOUNT PAGE -->
+    <section class="page" id="page-account">
+      <div class="ws-band">
+        <div class="ws-band-left">
+          <div class="eyebrow">Identity-level · shared across all workspaces</div>
+          <h1>Account &amp; <em>privacy</em></h1>
+          <div class="ws-band-meta">Profile, security, and privacy settings live with you — not with any workspace.</div>
+        </div>
+      </div>
+
+      <div class="cols">
+        <div class="card">
+          <h3>Your profile</h3>
+          <p class="card-desc">Shared identity across Leda, Leda Flow, and Coren</p>
+          <div style="display:flex; align-items:center; gap:14px; margin-bottom:20px;">
+            <div class="avatar" style="width:56px; height:56px; font-size: var(--font-body);">AK</div>
+            <div>
+              <div style="font-family:var(--display); font-size: var(--font-h6); letter-spacing:-0.01em;">Alex Kovachev</div>
+              <div style="font-size: var(--font-caption); color:var(--text-muted); margin-top:2px;">alex@kovachev.co · Sofia, Bulgaria</div>
+            </div>
+          </div>
+          <button class="btn ghost">Edit profile</button>
+        </div>
+
+        <div class="card">
+          <h3>Security</h3>
+          <p class="card-desc">Authentication and active sessions</p>
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:0.5px solid var(--border);">
+            <span style="font-size: var(--font-caption);">Password</span>
+            <button class="btn ghost">Change</button>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:0.5px solid var(--border);">
+            <span style="font-size: var(--font-caption);">Two-factor authentication</span>
+            <span class="tag-pill success">● Enabled</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0;">
+            <span style="font-size: var(--font-caption);">Active sessions</span>
+            <span style="font-size: var(--font-caption); color:var(--text-muted);">2 devices</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cols" style="margin-top:14px;">
+        <div class="card">
+          <h3>Privacy</h3>
+          <p class="card-desc">Data visibility and retention controls</p>
+          <p style="font-size: var(--font-caption); color:var(--text-muted); margin-bottom:14px;">Profile visibility, analytics sharing, data export, and deletion live here. Workspace-specific data stays with each workspace.</p>
+          <div style="display:flex; gap:8px;">
+            <button class="btn ghost">Export data</button>
+            <button class="btn ghost" style="color:var(--danger); border-color:var(--danger);">Delete account</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Notifications</h3>
+          <p class="card-desc">Master switches only. Workspace-specific alerts are configured in each workspace.</p>
+          <div style="font-size: var(--font-caption); color:var(--text-muted); line-height:1.6;">
+            Quiet hours · Digest frequency · Channel preferences (email, push, in-app)
+          </div>
+          <button class="btn ghost" style="margin-top:14px;">Manage globally</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+</div>
+
+<script>
+/* ============================================================
+   DATA MODEL
+   ============================================================ */
+const PROFILE = {
+  name: "Alex Kovachev",
+  email: "alex@kovachev.co",
+  initials: "AK",
+  credits: 142,
+  friendsJoined: 2
+};
+
+const WORKSPACES = [
+  {
+    id: "personal",
+    name: "Personal",
+    type: "personal",
+    roleLabel: "Your identity",
+    initials: "AK",
+    markBg: "var(--dacare-bg)",
+    markFg: "var(--dacare)",
+    eyebrow: "Personal workspace",
+    title: "Welcome back, <em>Alex</em>",
+    meta: "Your individual da.care space — <strong>Leda consumer</strong>, <strong>Leda Flow personal</strong>, <strong>Coren seeker</strong>. Family members managed inside Leda.",
+    hasMembers: true,
+    membersKind: "family",
+    products: {
+      leda: {
+        state: "active",
+        role: "Consumer",
+        name: "Leda",
+        desc: "Mini-apps, Loved Ones, and your Kovachev Family plan",
+        metric: "<strong>12</strong> mini-apps used · <strong>4</strong> family profiles",
+      },
+      ledaflow: {
+        state: "active",
+        role: "Personal planner",
+        name: "Leda Flow",
+        desc: "Your personal tasks and reminders",
+        metric: "<strong>4</strong> tasks today · next reminder 8:00 pm",
+      },
+      coren: {
+        state: "active",
+        role: "Seeker",
+        name: "Coren",
+        desc: "Find providers who actually fit you",
+        metric: "<strong>3</strong> saved matches · 1 pending intro",
+      }
+    }
+  },
+  {
+    id: "obsidian",
+    name: "Obsidian & Co.",
+    type: "professional",
+    roleLabel: "Team member",
+    initials: "OC",
+    markBg: "var(--ledaflow-bg)",
+    markFg: "var(--ledaflow-ink)",
+    eyebrow: "Professional workspace · invited member",
+    title: "<em>Obsidian</em> & Co.",
+    meta: "You're a <strong>team member</strong> here — your seat is <strong>covered by the employer</strong>. Your personal tasks never leave this workspace and are never shared with admins.",
+    hasMembers: true,
+    membersKind: "team-member",
+    products: {
+      leda: {
+        state: "coming-soon",
+        role: "Community",
+        name: "Leda",
+        desc: "Team community features — currently in R&D",
+      },
+      ledaflow: {
+        state: "active",
+        role: "Team member",
+        name: "Leda Flow",
+        desc: "Your seat on the team — tasks, focus view, personal-task privacy",
+        metric: "<strong>11</strong> tasks this week · next deadline Thu 3 pm",
+      },
+      coren: {
+        state: "not-enabled",
+        role: "Provider",
+        name: "Coren",
+        desc: "Not enabled for this workspace",
+      }
+    }
+  },
+  {
+    id: "leatherworks",
+    name: "Alex Leather Works",
+    type: "professional",
+    roleLabel: "Owner · provider",
+    initials: "LW",
+    markBg: "var(--coren-bg)",
+    markFg: "var(--coren-ink)",
+    eyebrow: "Professional workspace · you own this",
+    title: "Alex <em>Leather Works</em>",
+    meta: "Your side practice. <strong>You own this workspace</strong> — you pay Coren Verified and Leda Flow. Discoverable by clients through AI-optimized identity.",
+    hasMembers: false,
+    products: {
+      leda: {
+        state: "coming-soon",
+        role: "Community",
+        name: "Leda",
+        desc: "Client community space — coming with R&D",
+      },
+      ledaflow: {
+        state: "active",
+        role: "Solo owner",
+        name: "Leda Flow",
+        desc: "Manage bookings, client follow-ups, workshop schedule",
+        metric: "<strong>3</strong> active workflows · <strong>7</strong> bookings pending",
+      },
+      coren: {
+        state: "active",
+        role: "Provider",
+        name: "Coren",
+        desc: "Your AI-native provider identity. Get matched, not just listed.",
+        metric: "<strong>28</strong> profile views this week · <strong>94%</strong> match score · Verified",
+      }
+    }
+  }
+];
+
+const INVITATIONS = [
+  {
+    id: "inv1",
+    fromName: "Maya Lindgren",
+    fromInitials: "ML",
+    workspaceName: "Studio Ember",
+    workspaceType: "Leda Flow team",
+    role: "Team member",
+    sentOn: "2 days ago",
+    note: "Maya wants to add you to the design team at Studio Ember."
+  }
+];
+
+
+
+const PLANS = {
+  leda: {
+    context: "Consumer — you, your family, your people.",
+    tiers: [
+      {
+        name: "Free",
+        tagline: "The core calm. Forever.",
+        price: "€0",
+        unit: "Always free",
+        features: [
+          "All mini-apps, time-capped",
+          "Loved Ones and Projects",
+          "Anti-addictive defaults",
+          { muted: true, label: "No family plan" }
+        ],
+        cta: "Current plan",
+        ctaState: "current"
+      },
+      {
+        name: "Premium",
+        tagline: "Every mini-app, every lane.",
+        price: "€4.99",
+        unit: "per month · solo",
+        features: [
+          "Everything in Free",
+          "Lane 3 deep personalization",
+          "Unlimited Loved Ones",
+          "Priority AI models"
+        ],
+        cta: "Upgrade to Premium",
+        ctaState: "secondary"
+      },
+      {
+        name: "Family",
+        tagline: "One plan. Up to 6 people.",
+        price: "€9.99",
+        unit: "per month · household",
+        features: [
+          "Everything in Premium",
+          "Up to 6 family profiles",
+          "Shared Loved Ones & Projects",
+          "Household admin controls"
+        ],
+        cta: "Switch to Family",
+        ctaState: "primary",
+        recommended: true,
+        attached: "Tied to Personal workspace"
+      }
+    ]
+  },
+  ledaflow: {
+    context: "Per-seat. Individual pays for themselves · Team is paid by the employer.",
+    tiers: [
+      {
+        name: "Individual",
+        tagline: "Your morning plan, your tasks.",
+        price: "€6",
+        unit: "per month · one seat",
+        features: [
+          "Personal morning plan",
+          "Gmail + Calendar integration",
+          "Unlimited personal tasks",
+          { muted: true, label: "No team dashboard" }
+        ],
+        cta: "Upgrade",
+        ctaState: "secondary",
+        attached: "Would tie to Personal workspace"
+      },
+      {
+        name: "Team",
+        tagline: "Owner billing · covered seats.",
+        price: "€12",
+        unit: "per seat / month",
+        features: [
+          "Everything in Individual",
+          "Team dashboard (owner only)",
+          "Calendar time-blocking",
+          "Personal-task privacy enforced at DB level"
+        ],
+        cta: "Covered by Obsidian & Co.",
+        ctaState: "current",
+        recommended: true,
+        attached: "Your seat is covered — no action needed"
+      },
+      {
+        name: "Enterprise",
+        tagline: "SSO, SCIM, dedicated support.",
+        price: "Custom",
+        unit: "talk to us",
+        features: [
+          "Everything in Team",
+          "SAML SSO / SCIM provisioning",
+          "Dedicated account manager",
+          "Data residency options"
+        ],
+        cta: "Contact sales",
+        ctaState: "secondary"
+      }
+    ]
+  },
+  coren: {
+    context: "Provider freemium. Paid only for verification and analytics. Billed per business, not per person.",
+    tiers: [
+      {
+        name: "Free",
+        tagline: "Your AI-era identity. Always free.",
+        price: "€0",
+        unit: "per business · forever",
+        features: [
+          "AI-generated provider profile",
+          "USP + Compatibility Profile",
+          "LLM + Google ranking optimization",
+          "Matching across Leda & Leda Work"
+        ],
+        cta: "Current plan",
+        ctaState: "current"
+      },
+      {
+        name: "Verified",
+        tagline: "Credential checks + analytics.",
+        price: "€19",
+        unit: "per business / month",
+        features: [
+          "Everything in Free",
+          "Credential verification + badge",
+          "Discoverability Score & insights",
+          "Enhanced matching signals"
+        ],
+        cta: "Manage for Leather Works",
+        ctaState: "current",
+        recommended: true,
+        attached: "Active on Alex Leather Works"
+      }
+    ]
+  },
+  bundle: {
+    context: "Bundles are <strong>combinations</strong> of product plans, not a separate tier. Pick what fits, save where it makes sense.",
+    tiers: [
+      {
+        name: "Personal Suite",
+        tagline: "Leda Family + Flow Individual + Coren seeker.",
+        price: "€12.99",
+        unit: "per month · save €3",
+        features: [
+          "Leda Family plan (6 profiles)",
+          "Leda Flow Individual",
+          "Coren seeker (always free)",
+          "One invoice, one renewal date"
+        ],
+        cta: "Switch to bundle",
+        ctaState: "secondary",
+        attached: "Would consolidate your Personal billing"
+      },
+      {
+        name: "Practice Suite",
+        tagline: "For side-gigs and solo practitioners.",
+        price: "€22",
+        unit: "per month · per business",
+        features: [
+          "Coren Verified (1 business)",
+          "Leda Flow Individual for the practice",
+          "Provider analytics",
+          "Shared identity across both"
+        ],
+        cta: "Upgrade Leather Works",
+        ctaState: "primary",
+        recommended: true
+      },
+      {
+        name: "Business Suite",
+        tagline: "For team owners with Coren presence.",
+        price: "Custom",
+        unit: "from €15 / seat",
+        features: [
+          "Leda Flow Team (volume pricing)",
+          "Multiple Coren Verified businesses",
+          "Admin dashboard across businesses",
+          "Priority support"
+        ],
+        cta: "Talk to sales",
+        ctaState: "secondary"
+      }
+    ]
+  }
+};
+
+const MILESTONES = [
+  { friends: 1, reward: "7 days Pro free", reached: true },
+  { friends: 3, reward: "30 days Plus — any workspace", reached: false },
+  { friends: 5, reward: "60 days Plus — any workspace", reached: false },
+  { friends: 10, reward: "20% off Business forever", reached: false },
+  { friends: 25, reward: "60 days Business free", reached: false },
+  { friends: 50, reward: "1 year Enterprise free", reached: false }
+];
+
+const ACTIVATIONS = [
+  { product: "Leda", state: "done", credits: 30, label: "Completed Personal profile" },
+  { product: "Coren", state: "partial", credits: 25, progress: 60, label: "Activate Leather Works (Coren Verified)" },
+  { product: "Leda Flow", state: "partial", credits: 35, progress: 30, label: "Run first personal morning plan" }
+];
+
+/* ============================================================
+   STATE
+   ============================================================ */
+let state = {
+  activeWs: "personal",
+  subPage: "home",
+  page: "home",           // home | plans | growth | invitations | account
+  planTab: "leda",
+  theme: matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+};
+
+/* ============================================================
+   HELPERS
+   ============================================================ */
+const $ = (sel) => document.querySelector(sel);
+const $$ = (sel) => document.querySelectorAll(sel);
+
+function getWs(id) { return WORKSPACES.find(w => w.id === id); }
+
+/* ============================================================
+   THEME
+   ============================================================ */
+function applyTheme() {
+  document.documentElement.dataset.theme = state.theme;
+  $('#theme-icon').innerHTML = state.theme === 'dark'
+    ? '<path d="M20 14.5A9 9 0 119.5 4a7 7 0 0010.5 10.5z"/>'
+    : '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>';
+}
+function toggleTheme() {
+  state.theme = state.theme === 'dark' ? 'light' : 'dark';
+  applyTheme();
+}
+
+/* ============================================================
+   DROPDOWNS
+   ============================================================ */
+function toggleWsPanel(e) {
+  e.stopPropagation();
+  const idOpen = $('#id-panel').classList.contains('open');
+  if (idOpen) {
+    $('#id-panel').classList.remove('open');
+    $('#avatar-trigger').setAttribute('aria-expanded', 'false');
+  }
+  
+  const isOpen = $('#ws-panel').classList.toggle('open');
+  $('#ws-trigger').setAttribute('aria-expanded', isOpen);
+}
+
+function toggleIdPanel(e) {
+  e.stopPropagation();
+  const wsOpen = $('#ws-panel').classList.contains('open');
+  if (wsOpen) {
+    $('#ws-panel').classList.remove('open');
+    $('#ws-trigger').setAttribute('aria-expanded', 'false');
+  }
+  
+  const isOpen = $('#id-panel').classList.toggle('open');
+  $('#avatar-trigger').setAttribute('aria-expanded', isOpen);
+}
+
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.dropdown-panel') && !e.target.closest('#ws-trigger') && !e.target.closest('#avatar-trigger')) {
+    $('#ws-panel').classList.remove('open');
+    $('#id-panel').classList.remove('open');
+    $('#ws-trigger').setAttribute('aria-expanded', 'false');
+    $('#avatar-trigger').setAttribute('aria-expanded', 'false');
+  }
+});
+
+/* ============================================================
+   RENDER
+   ============================================================ */
+function renderWsSwitcher() {
+  const ws = getWs(state.activeWs);
+  const avatar = $('#ws-switcher-avatar');
+  avatar.style.background = ws.markBg;
+  avatar.style.color = ws.markFg;
+  avatar.textContent = ws.initials;
+  $('#ws-switcher-name').textContent = ws.name;
+  $('#ws-switcher-role').textContent = ws.roleLabel;
+}
+
+function renderWsPanel() {
+  const personal = WORKSPACES.filter(w => w.type === 'personal');
+  const professional = WORKSPACES.filter(w => w.type === 'professional');
+  $('#ws-personal').innerHTML = personal.map(renderWsOption).join('');
+  $('#ws-professional').innerHTML = professional.map(renderWsOption).join('');
+  if (INVITATIONS.length) {
+    $('#ws-invites').innerHTML = INVITATIONS.map(renderInviteMini).join('');
+    $('#ws-invites-section').style.display = '';
+  } else {
+    $('#ws-invites-section').style.display = 'none';
+  }
+}
+
+function renderWsOption(w) {
+  const active = w.id === state.activeWs ? 'active' : '';
+  return `
+    <button class="ws-option ${active}" onclick="switchWs('${w.id}')">
+      <div class="ws-option-mark" style="background:${w.markBg}; color:${w.markFg};">${w.initials}</div>
+      <div class="ws-option-body">
+        <div class="ws-option-name">${w.name}</div>
+        <div class="ws-option-meta">${w.roleLabel}</div>
+      </div>
+      <div class="ws-option-badge">${w.type === 'personal' ? 'Personal' : 'Pro'}</div>
+    </button>`;
+}
+
+function renderInviteMini(inv) {
+  return `
+    <div class="ws-invite">
+      <div class="ws-invite-top">
+        <div class="ws-invite-text">
+          <strong>${inv.fromName}</strong> invited you to<br>
+          <strong>${inv.workspaceName}</strong> · ${inv.workspaceType}
+        </div>
+      </div>
+      <div class="ws-invite-actions">
+        <button class="ws-invite-btn" onclick="acceptInvite('${inv.id}')">Accept</button>
+        <button class="ws-invite-btn ghost">Decline</button>
+      </div>
+    </div>`;
+}
+
+function switchWs(id) {
+  state.activeWs = id;
+  state.page = 'home';
+  state.subPage = 'home';
+  $('#ws-panel').classList.remove('open');
+  $('#ws-trigger').setAttribute('aria-expanded', 'false');
+  
+  showPage('home');
+  renderAll();
+  
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  
+  // re-trigger animation
+  const main = $('main');
+  main.style.animation = 'none';
+  requestAnimationFrame(() => { main.style.animation = ''; });
+}
+
+function renderWsBand() {
+  const ws = getWs(state.activeWs);
+  $('#ws-eyebrow').textContent = ws.eyebrow;
+  $('#ws-title').innerHTML = ws.title;
+  $('#ws-meta').innerHTML = ws.meta;
+  $('#subpage-members').style.display = ws.hasMembers ? '' : 'none';
+}
+
+function renderProducts() {
+  const ws = getWs(state.activeWs);
+  const keys = ['leda', 'ledaflow', 'coren'];
+  const labels = {
+    leda: 'Leda Label only.svg',
+    ledaflow: 'Leda FLow Label only.svg',
+    coren: 'Coren Label only.svg'
+  };
+  $('#product-grid').innerHTML = keys.map(k => {
+    const p = ws.products[k];
+    const stateLabel = p.state === 'active' ? 'Active'
+      : p.state === 'coming-soon' ? 'Coming soon'
+      : 'Not enabled';
+    const badge = p.state !== 'active'
+      ? `<span class="product-slot-badge"><span class="pulse"></span>${stateLabel}</span>`
+      : '';
+    return `
+      <div class="product-slot ${k}" data-state="${p.state}">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+          <div class="product-slot-name" style="margin: 0;">
+            <img src="${labels[k]}" alt="${p.name}" style="height: 24px; width: auto; display: block; filter: brightness(var(--text-primary-brightness, 1));">
+          </div>
+          ${badge || `<div class="product-slot-role">${p.role}</div>`}
+        </div>
+        <div class="product-slot-desc">${p.desc}</div>
+        <div class="product-slot-footer">
+          <div class="product-slot-metric">${p.metric || (p.state === 'coming-soon' ? 'In R&D — we\'ll email you when ready' : 'Available to activate for this workspace')}</div>
+          <div class="product-slot-open">${p.state === 'active' ? 'Open →' : p.state === 'coming-soon' ? 'Notify me' : 'Enable →'}</div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+
+
+function renderSideCard() {
+  const ws = getWs(state.activeWs);
+  let html = '';
+
+  if (ws.id === 'personal') {
+    html = `
+      <h3>Your Kovachev Family</h3>
+      <p class="card-desc">Managed inside Leda · admin only you</p>
+      ${renderMembers('family').slice(0, 600)}
+      <button class="btn ghost" style="margin-top:12px; width:100%;">＋ Add family profile</button>
+    `;
+  } else if (ws.id === 'obsidian') {
+    html = `
+      <h3>Seat summary</h3>
+      <p class="card-desc">You, at Obsidian &amp; Co.</p>
+      <div class="mini-stat-grid" style="margin-bottom:16px;">
+        <div class="mini-stat"><div class="mini-stat-value">11</div><div class="mini-stat-label">Tasks this week</div></div>
+        <div class="mini-stat"><div class="mini-stat-value">2</div><div class="mini-stat-label">Personal (private)</div></div>
+      </div>
+      <div style="font-size: var(--font-caption); color:var(--text-muted); line-height:1.6;">
+        Personal tasks are <strong style="color:var(--text);">never shared</strong> with team admins. Enforced at the database level.
+      </div>
+    `;
+  } else if (ws.id === 'leatherworks') {
+    html = `
+      <h3>Provider snapshot</h3>
+      <p class="card-desc">How Coren is surfacing your practice</p>
+      <div class="mini-stat-grid" style="margin-bottom:16px;">
+        <div class="mini-stat"><div class="mini-stat-value">94</div><div class="mini-stat-label">Discoverability</div></div>
+        <div class="mini-stat"><div class="mini-stat-value">28</div><div class="mini-stat-label">Views this week</div></div>
+      </div>
+      <div style="font-size: var(--font-caption); color:var(--text-muted); line-height:1.6; margin-bottom:10px;">
+        Surfacing well on <strong style="color:var(--text);">ChatGPT, Claude, Gemini, Grok</strong>. Google ranking holding steady.
+      </div>
+      <button class="btn ghost" style="width:100%;">View full analytics</button>
+    `;
+  }
+  $('#side-card').innerHTML = html;
+}
+
+function renderBilling() {
+  const ws = getWs(state.activeWs);
+  const keys = ['leda', 'ledaflow', 'coren'];
+  const bills = {
+    personal: [
+      { product: "Leda", plan: "Family plan", price: "€9.99 / mo", payer: "You · alex@kovachev.co", status: "Active" },
+      { product: "Leda Flow", plan: "Individual", price: "€6 / mo", payer: "You · alex@kovachev.co", status: "Active" },
+      { product: "Coren", plan: "Seeker (free)", price: "€0", payer: "—", status: "Active" }
+    ],
+    obsidian: [
+      { product: "Leda", plan: "Community (R&D)", price: "—", payer: "—", status: "Coming soon" },
+      { product: "Leda Flow", plan: "Team seat", price: "€12 / mo", payer: "Obsidian & Co. · billing@obsidian.co", status: "Covered by employer" },
+      { product: "Coren", plan: "Not enabled", price: "—", payer: "—", status: "Inactive" }
+    ],
+    leatherworks: [
+      { product: "Leda", plan: "Community (R&D)", price: "—", payer: "—", status: "Coming soon" },
+      { product: "Leda Flow", plan: "Individual (solo owner)", price: "€6 / mo", payer: "You · alex@kovachev.co", status: "Active" },
+      { product: "Coren", plan: "Verified", price: "€19 / mo", payer: "You · alex@kovachev.co", status: "Active" }
+    ]
+  };
+
+  $('#billing-list').innerHTML = bills[ws.id].map(b => `
+    <div class="member-row">
+      <div style="flex:1;">
+        <div class="member-name">${b.product} — ${b.plan}</div>
+        <div class="member-sub">Billed to: ${b.payer}</div>
+      </div>
+      <div style="text-align:right; font-size: var(--font-caption); margin-right:14px;">
+        <div style="font-weight:500;">${b.price}</div>
+        <div class="member-sub" style="margin-top:2px;">${b.status}</div>
+      </div>
+      <button class="btn ghost">Manage</button>
+    </div>
+  `).join('');
+}
+
+function renderMembers(forceKind) {
+  const ws = getWs(state.activeWs);
+  const kind = forceKind || ws.membersKind;
+
+  if (kind === 'family') {
+    const fam = [
+      { name: "Alex Kovachev", role: "Admin · you", sub: "alex@kovachev.co", init: "AK", bg: "var(--dacare-bg)", fg: "var(--dacare)" },
+      { name: "Elena Kovacheva", role: "Adult", sub: "Wife · full access", init: "EK", bg: "var(--leda-bg)", fg: "var(--leda-ink)" },
+      { name: "Kiril Kovachev", role: "Child", sub: "Age 11 · parental controls on", init: "KK", bg: "var(--ledaflow-bg)", fg: "var(--ledaflow-ink)" },
+      { name: "Sophia Kovacheva", role: "Child", sub: "Age 8 · parental controls on", init: "SK", bg: "var(--coren-bg)", fg: "var(--coren-ink)" },
+      { name: "Rayna Kovacheva", role: "Adult", sub: "Mom · senior mode enabled", init: "RK", bg: "var(--surface-sunken)", fg: "var(--text-muted)" }
+    ];
+    return fam.map(m => `
+      <div class="member-row">
+        <div class="member-avatar" style="background:${m.bg}; color:${m.fg};">${m.init}</div>
+        <div class="grow">
+          <div class="member-name">${m.name}</div>
+          <div class="member-sub">${m.sub}</div>
+        </div>
+        <div class="member-role">${m.role}</div>
+      </div>`).join('');
+  } else if (kind === 'team-member') {
+    const team = [
+      { name: "Nikolay Petrov", role: "Owner", sub: "Founder", init: "NP", bg: "var(--dacare-bg)", fg: "var(--dacare)" },
+      { name: "Alex Kovachev", role: "Member · you", sub: "alex@kovachev.co", init: "AK", bg: "var(--coren-bg)", fg: "var(--coren-ink)" },
+      { name: "Jonas D.", role: "Member", sub: "Joined this week", init: "JD", bg: "var(--leda-bg)", fg: "var(--leda-ink)" },
+      { name: "Mira T.", role: "Member", sub: "—", init: "MT", bg: "var(--ledaflow-bg)", fg: "var(--ledaflow-ink)" }
+    ];
+    return team.map(m => `
+      <div class="member-row">
+        <div class="member-avatar" style="background:${m.bg}; color:${m.fg};">${m.init}</div>
+        <div class="grow">
+          <div class="member-name">${m.name}</div>
+          <div class="member-sub">${m.sub}</div>
+        </div>
+        <div class="member-role">${m.role}</div>
+      </div>`).join('');
+  }
+  return '';
+}
+
+function renderMembersSection() {
+  const ws = getWs(state.activeWs);
+  if (ws.id === 'personal') {
+    $('#members-title').textContent = 'Kovachev Family';
+    $('#members-desc').textContent = 'Family is a feature inside your Personal workspace · Leda slot. Each member has their own Leda profile under your single Family plan subscription.';
+    $('#members-invite-btn').textContent = '＋ Add family profile';
+  } else if (ws.id === 'obsidian') {
+    $('#members-title').textContent = 'Obsidian & Co. team';
+    $('#members-desc').textContent = "You're a team member. You can see who else is on the team, but not manage them.";
+    $('#members-invite-btn').style.display = 'none';
+  }
+  $('#members-list').innerHTML = renderMembers();
+}
+
+function showPage(id) {
+  $$('.page').forEach(p => p.classList.remove('visible'));
+  $('#page-' + id).classList.add('visible');
+  state.page = id;
+  $('#id-panel').classList.remove('open');
+}
+
+function setSubPage(key, btn) {
+  state.subPage = key;
+  $$('.sub').forEach(s => s.style.display = 'none');
+  $('#sub-' + key).style.display = '';
+  $$('.page-nav button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  if (key === 'members') renderMembersSection();
+  if (key === 'billing') renderBilling();
+}
+
+function openIdPage(page) {
+  $('#id-panel').classList.remove('open');
+  showPage(page);
+  if (page === 'plans') renderPlans();
+  if (page === 'growth') renderGrowth();
+  if (page === 'invitations') renderInvitations();
+}
+
+/* ============================================================
+   PLANS
+   ============================================================ */
+function setPlanTab(key, btn) {
+  state.planTab = key;
+  $$('.plan-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  renderPlans();
+}
+function renderPlans() {
+  const data = PLANS[state.planTab];
+  $('#plan-grid').innerHTML = data.tiers.map(t => `
+    <div class="plan-card ${t.recommended ? 'recommended' : ''} ${t.ctaState === 'current' ? 'current' : ''}">
+      ${t.recommended ? '<div class="plan-card-flag">Recommended</div>' : ''}
+      <h3 class="plan-name display">${t.name}</h3>
+      <p class="plan-tagline">${t.tagline}</p>
+      <div class="plan-price display">${t.price}</div>
+      <div class="plan-price-unit">${t.unit}</div>
+      <ul class="plan-features">
+        ${t.features.map(f => typeof f === 'string'
+          ? `<li>${f}</li>`
+          : `<li class="muted">${f.label}</li>`).join('')}
+      </ul>
+      <button class="plan-cta ${t.ctaState === 'current' ? 'current' : t.ctaState === 'secondary' ? 'secondary' : ''}">${t.cta}</button>
+      ${t.attached ? `<div class="plan-attached">${t.attached}</div>` : ''}
+    </div>
+  `).join('');
+  $('#plan-context').innerHTML = data.context;
+}
+
+/* ============================================================
+   GROWTH
+   ============================================================ */
+function renderGrowth() {
+  $('#milestones').innerHTML = MILESTONES.map(m => `
+    <div class="milestone-item" style="display:flex; align-items:center; gap:20px; padding:16px 0; border-bottom:0.5px solid var(--border); ${!m.reached ? 'opacity:0.45;' : ''}; transition: opacity 0.3s var(--ease-out);">
+      <div class="milestone-count display" style="width:36px; height:36px; border-radius:10px; background:${m.reached ? 'var(--success-bg)' : 'var(--surface-sunken)'}; color:${m.reached ? 'var(--success)' : 'var(--text-soft)'}; display:grid; place-items:center; font-size: 18px; font-weight:400; flex-shrink:0;">${m.friends}</div>
+      <div class="milestone-body" style="flex:1;">
+        <div class="milestone-title" style="font-size: var(--font-caption); font-weight:600; letter-spacing: 0.01em;">${m.friends} friend${m.friends > 1 ? 's' : ''} joined</div>
+        <div class="milestone-reward" style="font-size: 12px; color:var(--text-muted); margin-top:2px;">${m.reward}</div>
+      </div>
+      ${m.reached ? '<span class="tag-pill success" style="font-size: 10px;">✓ Claimed</span>' : ''}
+    </div>
+  `).join('');
+
+  $('#activation-list').innerHTML = ACTIVATIONS.map(a => `
+    <div class="activation-row" style="margin-bottom:20px;">
+      <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:8px;">
+        <div style="font-size: var(--font-caption); font-weight:600; letter-spacing: 0.01em;">${a.label}</div>
+        <div style="font-size: 11px; color:var(--text-soft); font-weight:600;">+${a.credits} Credits</div>
+      </div>
+      <div class="progress-rail" style="height: 6px; border-radius: 3px;">
+        <div class="progress-fill" style="width:${a.state === 'done' ? 100 : a.progress}%; background:${a.state === 'done' ? 'var(--success)' : 'var(--ledaflow)'}; border-radius: 3px;"></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+/* ============================================================
+   INVITATIONS
+   ============================================================ */
+function renderInvitations() {
+  if (!INVITATIONS.length) {
+    $('#invites-list').innerHTML = '';
+    return;
+  }
+  $('#invites-list').innerHTML = INVITATIONS.map(inv => `
+    <div class="card">
+      <div style="display:flex; align-items:flex-start; gap:16px;">
+        <div class="member-avatar" style="width:56px; height:56px; background:var(--ledaflow-bg); color:var(--ledaflow-ink); font-size: var(--font-body);">${inv.fromInitials}</div>
+        <div style="flex:1;">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:4px; flex-wrap:wrap;">
+            <div style="font-family:var(--display); font-size: var(--font-h6); letter-spacing:-0.01em;">${inv.workspaceName}</div>
+            <span class="tag-pill ledaflow">${inv.workspaceType}</span>
+          </div>
+          <div style="font-size: var(--font-caption); color:var(--text-muted); margin-bottom:4px;">
+            <strong style="color:var(--text); font-weight:500;">${inv.fromName}</strong> invited you as <strong style="color:var(--text); font-weight:500;">${inv.role}</strong>
+          </div>
+          <div style="font-size: var(--font-caption); color:var(--text-soft);">Sent ${inv.sentOn} · ${inv.note}</div>
+          <div style="display:flex; gap:8px; margin-top:16px;">
+            <button class="btn" onclick="acceptInvite('${inv.id}')">Accept &amp; add workspace</button>
+            <button class="btn ghost">Decline</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function acceptInvite(id) {
+  const inv = INVITATIONS.find(i => i.id === id);
+  if (!inv) return;
+  WORKSPACES.push({
+    id: 'studio-ember',
+    name: inv.workspaceName,
+    type: 'professional',
+    roleLabel: 'Team member',
+    initials: 'SE',
+    markBg: 'var(--ledaflow-bg)',
+    markFg: 'var(--ledaflow-ink)',
+    eyebrow: 'Professional workspace · just added',
+    title: '<em>Studio Ember</em>',
+    meta: "You just joined <strong>Studio Ember</strong> as a team member. Your seat is covered by the team.",
+    hasMembers: true,
+    membersKind: 'team-member',
+    products: {
+      leda: { state: 'coming-soon', role: 'Community', name: 'Leda', desc: 'Team community — R&D' },
+      ledaflow: { state: 'active', role: 'Team member', name: 'Leda Flow', desc: 'Your seat — freshly added', metric: '<strong>0</strong> tasks yet · morning plan arrives tomorrow' },
+      coren: { state: 'not-enabled', role: 'Provider', name: 'Coren', desc: 'Not enabled for this workspace' }
+    }
+  });
+  const idx = INVITATIONS.findIndex(i => i.id === id);
+  INVITATIONS.splice(idx, 1);
+  $('.icon-btn .dot')?.style && ($('.icon-btn .dot').style.display = 'none');
+  state.activeWs = 'studio-ember';
+  state.page = 'home';
+  state.subPage = 'home';
+  showPage('home');
+  renderAll();
+  renderInvitations();
+}
+
+/* ============================================================
+   MAIN RENDER
+   ============================================================ */
+function renderAll() {
+  renderWsSwitcher();
+  renderWsPanel();
+  renderWsBand();
+  renderProducts();
+  renderSideCard();
+  renderBilling();
+  if (state.page === 'plans') renderPlans();
+  if (state.page === 'growth') renderGrowth();
+  if (state.page === 'invitations') renderInvitations();
+}
+
+applyTheme();
+renderAll();
+</script>
+</body>
+</html>

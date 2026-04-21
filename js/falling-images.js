@@ -83,6 +83,11 @@ function initFallingImages(containerId, canvasId) {
   activeImages.forEach((src) => {
     const img = new Image();
     img.decoding = 'async';
+    img.onload = () => {
+      if (allSettled && !isRunning && isVisible) {
+        drawFrame();
+      }
+    };
     img.src = src;
     imageCache.set(src, img);
   });

@@ -14,7 +14,7 @@ const initSphere = () => {
     const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     const isLowPowerDevice = () =>
         reducedMotionQuery.matches ||
-        (navigator.deviceMemory && navigator.deviceMemory <= 4);
+        (navigator.deviceMemory && navigator.deviceMemory < 3);
 
     const setStaticMode = (enabled) => {
         document.body.classList.toggle('homepage-hero--static', enabled);
@@ -392,6 +392,12 @@ const initSphere = () => {
     });
 
     heroObserver.observe(section);
+
+    const sectionObserver = new ResizeObserver(() => {
+        resize();
+        syncPlayback();
+    });
+    sectionObserver.observe(section);
 
     window.addEventListener('resize', () => {
         resize();
