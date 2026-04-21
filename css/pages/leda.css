@@ -434,7 +434,7 @@ body.leda-page {
 .leda-page .leda-landing .mood-ic {
   width: 68px;
   height: 68px;
-  border-radius: 16px;
+  border-radius: 0;
   background: transparent;
   display: flex;
   align-items: center;
