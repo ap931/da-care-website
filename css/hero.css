@@ -1,117 +1,136 @@
-/* Hero Section Custom Styles */
-.hero-sphere-section {
+/* ── Hero Canvas Section ──────────────────────────────────── */
+.hero-canvas-section {
     position: relative;
     width: 100%;
     height: 100vh;
     min-height: 600px;
+    overflow: hidden;
+    background-color: #FAFAFA;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
-    background-color: var(--bg-white);
-    isolation: isolate;
 }
 
-
-#sphereCanvas, #orbiterCanvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: block;
-}
-
-#sphereCanvas {
-    z-index: 2; /* Moved above the grid */
-}
-
-.hero-sphere-heading {
-    position: relative;
-    z-index: 10;
-    pointer-events: none;
-    color: var(--text-primary);
-    font-weight: 700;
-    text-align: center;
-    letter-spacing: -0.04em; /* Tighter premium kerning */
-    padding: 0 1.5rem;
-    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    /* Multi-layered soft white aura for contrast and depth */
-    filter: drop-shadow(0 4px 16px rgba(255, 255, 255, 0.8)) 
-            drop-shadow(0 0 40px rgba(255, 255, 255, 1));
-}
-
-#orbiterCanvas {
-    z-index: 20;
-    pointer-events: none;
-}
-
-.hero-sphere-orbits {
+#heroCanvas {
     position: absolute;
     inset: 0;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 220ms ease;
+    display: block;
+    z-index: 0;
+    opacity: 1;
 }
 
-.hero-sphere-orbit {
+/* Intro overlay — sits above canvas, below content; JS fades it out */
+#heroIntroOverlay {
     position: absolute;
-    width: clamp(4rem, 8vw, 6rem);
-    aspect-ratio: 1;
-    object-fit: contain;
-    padding: clamp(0.6rem, 1.4vw, 0.9rem);
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.82);
-    box-shadow:
-        0 10px 26px rgba(0, 0, 0, 0.12),
-        0 0 0 1px rgba(255, 255, 255, 0.8) inset;
-    animation: heroOrbitFloat 7s ease-in-out infinite;
+    inset: 0;
+    z-index: 5;
+    background: #FAFAFA;
+    pointer-events: none;
 }
 
-.hero-sphere-orbit--a {
-    left: 16%;
-    top: 27%;
+/* ── Hero text content ────────────────────────────────────── */
+.hero-content {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0 1.5rem;
+    gap: 1.25rem;
+    max-width: 800px;
+    pointer-events: none;
 }
 
-.hero-sphere-orbit--b {
-    right: 15%;
-    top: 29%;
-    animation-delay: -1.6s;
+/* ── Hero eyebrow icon ───────────────────────────────────── */
+.hero-eyebrow-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    object-fit: cover;
+    will-change: transform;
+    transform-origin: 50% 50%;
 }
 
-.hero-sphere-orbit--c {
-    left: 50%;
-    bottom: 18%;
-    transform: translateX(-50%);
-    animation-delay: -3.2s;
+/* ── Hero button row ─────────────────────────────────────── */
+.hero-btn-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 0.5rem;
+    pointer-events: auto;
 }
 
-@keyframes heroOrbitFloat {
-    0%,
-    100% {
-        transform: translate3d(0, 0, 0);
+/* ── Gradient primary button ─────────────────────────────── */
+.btn--gradient {
+    background: linear-gradient(135deg, #F69B75 0%, #C1DB8D 50%, #A9E2FF 100%);
+    background-size: 200% 200%;
+    background-position: 0% 50%;
+    color: #2a2a2a;
+    border: none;
+    font-weight: 600;
+    box-shadow: 0 4px 18px rgba(246, 155, 117, 0.35);
+    transition: background-position 0.5s ease,
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+.btn--gradient:hover {
+    background-position: 100% 50%;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(193, 219, 141, 0.45);
+}
+
+.btn--gradient:active {
+    transform: translateY(0);
+}
+
+@media (max-width: 480px) {
+    .hero-btn-row {
+        flex-direction: column;
+        align-items: center;
     }
-    50% {
-        transform: translate3d(0, -10px, 0);
+    .hero-btn-row .btn {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
     }
 }
 
-.hero-sphere-orbit--c {
-    animation-name: heroOrbitFloatCentered;
+
+/* ── Heading ─────────────────────────────────────────────── */
+.hero-heading {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--font-h1);
+    line-height: 1.05;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+    margin: 0;
 }
 
-@keyframes heroOrbitFloatCentered {
-    0%,
-    100% {
-        transform: translate3d(-50%, 0, 0);
-    }
-    50% {
-        transform: translate3d(-50%, -10px, 0);
-    }
+.hero-heading em {
+    font-style: italic;
+    color: var(--mint-dark);
 }
 
-/* Shaped Section Product Images */
+/* ── Subline ─────────────────────────────────────────────── */
+.hero-subline {
+    font-family: var(--font-sans);
+    font-weight: 400;
+    font-size: var(--font-body-sm);
+    color: var(--text-secondary);
+    margin: 0;
+    max-width: 44ch;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Shared product/section styles (homepage + leda page)
+   ═══════════════════════════════════════════════════════════ */
+
 .shaped-product-img {
     display: block;
     max-width: calc(100% - clamp(4rem, 10vw, 8rem));
@@ -129,7 +148,6 @@
     transform: scale(1.02);
 }
 
-/* Ensure the container of the image is centered */
 .leda-page .leda-landing .shaped-img {
     display: flex;
     align-items: center;
@@ -137,10 +155,9 @@
 }
 
 .leda-page .leda-landing .shaped-img.shaped-img--coral { background: linear-gradient(135deg, var(--coral-light) 0%, var(--coral) 100%); }
-.leda-page .leda-landing .shaped-img.shaped-img--leda  { background: linear-gradient(135deg, var(--mint-light) 0%, var(--mint) 100%); }
-.leda-page .leda-landing .shaped-img.shaped-img--sky   { background: linear-gradient(135deg, var(--sky-light) 0%, var(--sky) 100%); }
+.leda-page .leda-landing .shaped-img.shaped-img--leda  { background: linear-gradient(135deg, var(--mint-light)  0%, var(--mint)  100%); }
+.leda-page .leda-landing .shaped-img.shaped-img--sky   { background: linear-gradient(135deg, var(--sky-light)   0%, var(--sky)   100%); }
 
 .leda-page .leda-landing .shaped-copy .btn-row { margin-top: var(--space-8); }
 
 .about-hero { display: none; }
-

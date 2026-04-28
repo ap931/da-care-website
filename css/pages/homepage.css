@@ -44,8 +44,7 @@ body.homepage .navbar--hidden {
 }
 
 body.homepage.intro-running .navbar,
-body.homepage.intro-running #orbiterCanvas,
-body.homepage.intro-running .hero-sphere-heading {
+body.homepage.intro-running #orbiterCanvas {
   opacity: 0;
   pointer-events: none;
 }
@@ -57,11 +56,6 @@ body.homepage.intro-running .navbar {
 
 body.homepage.intro-running #orbiterCanvas {
   animation: customFadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) 1.4s forwards;
-}
-
-body.homepage.intro-running .hero-sphere-heading {
-  transform: translateY(20px);
-  animation: customFadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 1.3s forwards;
 }
 
 body.homepage.homepage-hero--static .navbar,

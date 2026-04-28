@@ -51,14 +51,7 @@ const initSphere = () => {
 
     const INTRO_DURATION = 1600;
 
-    // Play intro only once per session
-    if (sessionStorage.getItem('daCareHeroIntroPlayed')) {
-        introElapsed = INTRO_DURATION;
-        postIntroElapsed = POST_INTRO_FADE;
-        document.body.classList.remove('intro-running');
-    } else {
-        sessionStorage.setItem('daCareHeroIntroPlayed', 'true');
-    }
+    // Always play intro on every page load
     const PARTICLE_COUNT =
         window.innerWidth >= 1600 ? 2800 :
         window.innerWidth >= 1280 ? 2400 :

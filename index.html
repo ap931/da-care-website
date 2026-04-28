@@ -28,21 +28,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      rel="preload"
-      as="style"
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap"
-    />
-
-    <!-- SF Pro Display Fallback (System UI) -->
-    <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
-    />    <!-- Note: Using Inter as a close Google Font alternative to SF Pro if system-ui isn't enough, 
-       but keeping the CSS variable stack as primary. -->
+    />
 
     <!-- Stylesheets (load order matters) -->
     <link rel="stylesheet" href="/css/reset.css" />
@@ -53,7 +41,7 @@
     <link rel="stylesheet" href="/css/pages/leda.css" />
     <link rel="stylesheet" href="/css/hero.css" />
   </head>
-  <body class="homepage leda-page intro-running">
+  <body class="homepage leda-page">
     <!-- Skip Link (Accessibility) -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
@@ -100,15 +88,17 @@
     <main id="main-content">
 
     <!-- Hero Section -->
-    <section class="hero-sphere-section" id="hero">
-      <canvas id="sphereCanvas"></canvas>
-      <h1 class="hero-sphere-heading" style="font-size: var(--font-h1);">Your da.care system</h1>
-      <div class="hero-sphere-orbits" aria-hidden="true">
-        <img src="/images/Hero/Orbit/Vector.png" alt="" class="hero-sphere-orbit hero-sphere-orbit--a" decoding="async" />
-        <img src="/images/Hero/Orbit/Group 286.png" alt="" class="hero-sphere-orbit hero-sphere-orbit--b" decoding="async" />
-        <img src="/images/Hero/Orbit/Group 285.png" alt="" class="hero-sphere-orbit hero-sphere-orbit--c" decoding="async" />
+    <section class="hero-canvas-section" id="hero">
+      <canvas id="heroCanvas" aria-hidden="true"></canvas>
+      <div class="hero-intro-overlay" id="heroIntroOverlay" aria-hidden="true"></div>
+      <div class="hero-content">
+        <h1 class="hero-heading">Less noise, More life.</h1>
+        <p class="hero-subline">Lead a better and calmer life with our products</p>
+        <div class="btn-row hero-btn-row">
+          <a href="#section1" class="btn btn--gradient" id="hero-cta-explore">Explore the ecosystem</a>
+          <a href="/about" class="btn btn--secondary" id="hero-cta-about">Who we are</a>
+        </div>
       </div>
-      <canvas id="orbiterCanvas"></canvas>
     </section>
 
 
@@ -217,7 +207,7 @@
     </footer>
 
     <!-- Scripts (deferred) -->
-    <script src="/js/homepage-hero.js" defer></script>
+    <script src="/js/hero-canvas.js" defer></script>
     <script src="/js/homepage-main.js" defer></script>
     <script src="/js/main.js" defer></script>
 
